@@ -6,11 +6,11 @@ import Link from 'next/link';
 
 const BackgroundFrame = ({ frame, index, totalFrames, inputRanges, scrollYProgress }: any) => {
   // Explicitly anchor values for every single frame to prevent extrapolation bounce-back
-  const opacityRange = inputRanges.map((_, i) => (i === index ? 1 : 0));
+  const opacityRange = inputRanges.map((_: any, i: number) => (i === index ? 1 : 0));
   const opacity = useTransform(scrollYProgress, inputRanges, opacityRange);
 
   // Scale starts at 1, reaches 1.1 at the next frame, and stays at 1.1
-  const scaleRange = inputRanges.map((_, i) => {
+  const scaleRange = inputRanges.map((_: any, i: number) => {
     if (i <= index) return 1;
     return 1.1;
   });
@@ -19,7 +19,7 @@ const BackgroundFrame = ({ frame, index, totalFrames, inputRanges, scrollYProgre
   return (
     <motion.div
       className="absolute inset-0 w-full h-full"
-      style={{ opacity, scale, zIndex: 10 }}
+      style={{ opacity, scale, zIndex: 10 } as any}
     >
       <div 
         className="absolute inset-0 bg-cover bg-center"
@@ -31,11 +31,11 @@ const BackgroundFrame = ({ frame, index, totalFrames, inputRanges, scrollYProgre
 };
 
 const ContentFrame = ({ frame, index, totalFrames, inputRanges, scrollYProgress }: any) => {
-  const opacityRange = inputRanges.map((_, i) => (i === index ? 1 : 0));
+  const opacityRange = inputRanges.map((_: any, i: number) => (i === index ? 1 : 0));
   const opacity = useTransform(scrollYProgress, inputRanges, opacityRange);
 
   // Y position: starts at 50, goes to 0 at active frame, and goes to -50 after
-  const yRange = inputRanges.map((_, i) => {
+  const yRange = inputRanges.map((_: any, i: number) => {
     if (i < index) return 50;
     if (i === index) return 0;
     return -50;
@@ -46,7 +46,7 @@ const ContentFrame = ({ frame, index, totalFrames, inputRanges, scrollYProgress 
   return (
     <motion.div
       className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"
-      style={{ opacity, y }}
+      style={{ opacity, y } as any}
     >
       <div className="pointer-events-auto w-full max-w-6xl mx-auto px-4 flex flex-col items-center">
         <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 drop-shadow-lg text-center">
@@ -85,7 +85,7 @@ export default function Hero({ frames = [] }: { frames: any[] }) {
   });
 
   const totalFrames = frames.length;
-  const inputRanges = Array.from({ length: totalFrames }, (_, i) => i / (totalFrames - 1));
+  const inputRanges = Array.from({ length: totalFrames }, (_: any, i: number) => i / (totalFrames - 1));
 
   return (
     <section ref={containerRef} className="relative h-[900vh] bg-black">
@@ -122,7 +122,7 @@ export default function Hero({ frames = [] }: { frames: any[] }) {
           className="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center text-white/70"
           style={{ 
             opacity: useTransform(scrollYProgress, [0.8, 1], [1, 0])
-          }}
+          } as any}
         >
           <span className="text-sm mb-3 uppercase tracking-widest font-semibold">Scroll Perlahan</span>
           <div className="w-[2px] h-20 bg-white/20 relative overflow-hidden rounded-full">

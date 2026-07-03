@@ -19,6 +19,7 @@ async function main() {
   await prisma.certification.deleteMany();
   await prisma.program.deleteMany();
   await prisma.category.deleteMany();
+  await prisma.footerData.deleteMany();
 
   // 1. Kategori
   for (const cat of json.categoriesData) {
@@ -120,6 +121,18 @@ async function main() {
   }
   console.log(`Berhasil migrasi ${json.heroStoryFrames.length} Slide Beranda.`);
   
+  // 8. Footer Data
+  await prisma.footerData.create({
+    data: {
+      id: 1,
+      description: 'Lembaga pelatihan dan sertifikasi kompetensi terdepan untuk talenta digital masa depan.',
+      address: 'Jl. Contoh Alamat No. 123, Jakarta',
+      email: 'info@dki.example.com',
+      phone: '+62 812 3456 7890'
+    }
+  });
+  console.log(`Berhasil migrasi Footer Data.`);
+
   console.log('✅ SEMUA DATA BERHASIL DIMIGRASIKAN KE DATABASE!');
 }
 

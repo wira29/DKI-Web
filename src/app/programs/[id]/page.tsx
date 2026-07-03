@@ -1,7 +1,6 @@
 import { prisma } from '@/lib/db';
 import Link from 'next/link';
 import { ArrowLeft, CheckCircle2 } from 'lucide-react';
-import Link from 'next/link';
 
 export default async function ProgramDetail({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;

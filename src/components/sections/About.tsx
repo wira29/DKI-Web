@@ -16,7 +16,7 @@ export default function About({ data: aboutData }: { data: any }) {
                 dangerouslySetInnerHTML={{ __html: aboutData.description }}
               />
               <div className="grid grid-cols-3 gap-8 border-t border-gray-100 pt-10">
-                {aboutData.stats.map((stat, i) => (
+                {aboutData.stats.map((stat: { value: string; label: string }, i: number) => (
                   <div key={i}>
                     <div className="text-4xl font-semibold text-black tracking-tight mb-2">{stat.value}</div>
                     <div className="text-sm text-gray-500 font-medium">{stat.label}</div>
