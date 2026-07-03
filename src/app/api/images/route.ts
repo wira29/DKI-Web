@@ -10,8 +10,8 @@ export async function GET() {
       const ext = path.extname(file).toLowerCase();
       return ['.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp'].includes(ext);
     });
-    // Return relative URLs
-    return NextResponse.json({ images: images.map(img => `/${img}`) });
+    // Return API URLs
+    return NextResponse.json({ images: images.map(img => `/api/file/${img}`) });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to read public directory' }, { status: 500 });
   }
@@ -35,7 +35,7 @@ export async function POST(request: Request) {
     const filePath = path.join(publicDir, filename);
 
     fs.writeFileSync(filePath, buffer);
-    return NextResponse.json({ url: `/${filename}` });
+    return NextResponse.json({ url: `/api/file/${filename}` });
   } catch (error) {
     console.error('Upload error:', error);
     return NextResponse.json({ error: 'Failed to upload file' }, { status: 500 });
