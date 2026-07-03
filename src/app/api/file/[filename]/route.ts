@@ -2,8 +2,8 @@ import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 
-export async function GET(request: Request, { params }: { params: { filename: string } }) {
-  const filename = params.filename;
+export async function GET(request: Request, context: { params: Promise<{ filename: string }> }) {
+  const { filename } = await context.params;
   // Pastikan tidak ada karakter path traversal seperti ../
   const safeFilename = path.basename(filename);
   const filePath = path.join(process.cwd(), 'public', safeFilename);
