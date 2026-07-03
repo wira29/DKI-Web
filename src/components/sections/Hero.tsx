@@ -31,16 +31,28 @@ const BackgroundFrame = ({ frame, index, totalFrames, inputRanges, scrollYProgre
 };
 
 const ContentFrame = ({ frame, index, totalFrames, inputRanges, scrollYProgress }: any) => {
-  const opacityRange = inputRanges.map((_: any, i: number) => (i === index ? 1 : 0));
-  const opacity = useTransform(scrollYProgress, inputRanges, opacityRange);
-
-  // Y position: starts at 50, goes to 0 at active frame, and goes to -50 after
-  const yRange = inputRanges.map((_: any, i: number) => {
-    if (i < index) return 50;
-    if (i === index) return 0;
-    return -50;
+  const center = index / (totalFrames - 1);
+  const detailedInputRanges = Array.from({ length: 101 }, (_, i) => i / 100);
+  
+  const opacityRange = detailedInputRanges.map(val => {
+    const distance = Math.abs(val - center);
+    // Teks bertahan penuh saat jarak < 0.05 dari titik tengah
+    if (distance < 0.05) return 1;
+    // Memudar lebih cepat dari 0.05 ke 0.15 agar tidak bocor ke frame lain
+    if (distance < 0.15) return 1 - ((distance - 0.05) / 0.1);
+    return 0;
   });
-  const y = useTransform(scrollYProgress, inputRanges, yRange);
+
+  const yRange = detailedInputRanges.map(val => {
+    const distance = val - center;
+    if (distance < -0.15) return 50;
+    if (distance > 0.15) return -50;
+    if (distance < 0) return Math.abs(distance / 0.15) * 50;
+    return (distance / 0.15) * -50;
+  });
+
+  const opacity = useTransform(scrollYProgress, detailedInputRanges, opacityRange);
+  const y = useTransform(scrollYProgress, detailedInputRanges, yRange);
   const isLastFrame = index === totalFrames - 1;
 
   return (
@@ -88,7 +100,7 @@ export default function Hero({ frames = [] }: { frames: any[] }) {
   const inputRanges = Array.from({ length: totalFrames }, (_: any, i: number) => i / (totalFrames - 1));
 
   return (
-    <section ref={containerRef} className="relative h-[900vh] bg-black">
+    <section ref={containerRef} className="relative h-[250vh] md:h-[400vh] bg-black">
       <div className="sticky top-0 left-0 w-full h-screen overflow-hidden flex items-center justify-center">
         
         {/* Background Images Crossfade */}
