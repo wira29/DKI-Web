@@ -1,8 +1,8 @@
-import { MetadataRoute } from 'next'
+import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // Ganti domain ini dengan domain asli Anda saat deployment
-  const baseUrl = 'https://www.digitalkompetensi.id';
+  const baseUrl = 'https://dki.hummatech.com';
   
   return [
     {

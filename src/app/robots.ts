@@ -8,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       disallow: ['/cms/', '/cms/*'],
     },
     // Ganti domain ini dengan domain asli Anda saat deployment
-    sitemap: 'https://www.digitalkompetensi.id/sitemap.xml',
+    sitemap: 'https://dki.hummatech.com/sitemap.xml',
   }
 }
