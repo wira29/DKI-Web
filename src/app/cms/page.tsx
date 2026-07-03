@@ -142,6 +142,30 @@ export default function CmsDashboard() {
           </div>
 
           <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Struktur Organisasi (Gambar)</label>
+            <ImageSelector 
+              value={data.aboutData.org_structure_image || ''} 
+              onChange={val => setData({...data, aboutData: {...data.aboutData, org_structure_image: val}})}
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Filosofi Logo (WYSIWYG)</label>
+            <WysiwygEditor 
+              value={data.aboutData.logo_philosophy || ''} 
+              onChange={(val) => setData({...data, aboutData: {...data.aboutData, logo_philosophy: val}})} 
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Penggunaan Logo (WYSIWYG)</label>
+            <WysiwygEditor 
+              value={data.aboutData.logo_usage || ''} 
+              onChange={(val) => setData({...data, aboutData: {...data.aboutData, logo_usage: val}})} 
+            />
+          </div>
+
+          <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Deskripsi (WYSIWYG)</label>
             <WysiwygEditor 
               value={data.aboutData.description} 

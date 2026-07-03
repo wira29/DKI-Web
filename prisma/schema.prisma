@@ -10,6 +10,7 @@ datasource db {
 model Category {
   id    String @id
   name  String
+  type  String @default("KURSUS") // "KURSUS" or "PELATIHAN_KERJA"
 }
 
 model Program {
@@ -23,6 +24,7 @@ model Program {
   badge             String?
   category          String
   level             String
+  type              String  @default("KURSUS") // "KURSUS" or "PELATIHAN_KERJA"
 }
 
 model Certification {
@@ -60,9 +62,12 @@ model AboutData {
   title       String
   description String @db.Text
   image       String @db.Text
-  vision      String @db.Text
-  mission     String @db.Text
-  stats       String @db.Text
+  vision              String  @db.Text
+  mission             String  @db.Text
+  stats               String  @db.Text
+  org_structure_image String? @db.Text
+  logo_philosophy     String? @db.Text
+  logo_usage          String? @db.Text
 }
 
 model HeroSlide {

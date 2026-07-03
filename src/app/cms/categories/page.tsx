@@ -42,7 +42,8 @@ export default function CmsCategories() {
     
     newData.categoriesData.push({
       id: 'cat-' + Date.now(),
-      name: 'Kategori Baru'
+      name: 'Kategori Baru',
+      type: 'KURSUS'
     });
     setData(newData);
   };
@@ -95,6 +96,7 @@ export default function CmsCategories() {
             <tr className="bg-gray-50 border-b border-gray-200">
               <th className="px-6 py-4 text-sm font-semibold text-gray-600">ID Kategori</th>
               <th className="px-6 py-4 text-sm font-semibold text-gray-600">Nama Kategori</th>
+              <th className="px-6 py-4 text-sm font-semibold text-gray-600">Jenis</th>
               <th className="px-6 py-4 text-sm font-semibold text-gray-600 text-right">Aksi</th>
             </tr>
           </thead>
@@ -115,6 +117,20 @@ export default function CmsCategories() {
                     className="w-full max-w-sm px-4 py-2 rounded-lg border border-gray-200 font-medium text-black text-sm outline-none focus:border-black"
                   />
                 </td>
+                <td className="px-6 py-4">
+                  <select
+                    value={cat.type || 'KURSUS'}
+                    onChange={e => {
+                      const newData = { ...data };
+                      newData.categoriesData[index].type = e.target.value;
+                      setData(newData);
+                    }}
+                    className="w-full px-4 py-2 rounded-lg border border-gray-200 text-sm outline-none focus:border-black text-black bg-white"
+                  >
+                    <option value="KURSUS">Lembaga Kursus</option>
+                    <option value="PELATIHAN_KERJA">Lembaga Pelatihan Kerja</option>
+                  </select>
+                </td>
                 <td className="px-6 py-4 text-right">
                   <button 
                     onClick={() => handleDelete(cat.id)}
@@ -128,7 +144,7 @@ export default function CmsCategories() {
             ))}
             {(!data.categoriesData || data.categoriesData.length === 0) && (
               <tr>
-                <td colSpan={3} className="px-6 py-12 text-center text-gray-500 bg-white">
+                <td colSpan={4} className="px-6 py-12 text-center text-gray-500 bg-white">
                   Belum ada kategori. Klik "Tambah Kategori" untuk mulai.
                 </td>
               </tr>

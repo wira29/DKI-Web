@@ -1,11 +1,27 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
+import { useSearchParams } from 'next/navigation';
 
-export default function ProgramsList({ programsData }: { programsData: any[] }) {
-  const [activeFilter, setActiveFilter] = useState<string>('All');
-  const categories = ['All', ...Array.from(new Set(programsData.map(p => p.category)))];
+function ProgramsListContent({ programsData, categoriesData }: { programsData: any[], categoriesData: any[] }) {
+  const searchParams = useSearchParams();
+  const categoryParam = searchParams.get('category');
+  const [activeFilter, setActiveFilter] = useState<string>(categoryParam || 'All');
+
+  useEffect(() => {
+    if (categoryParam) {
+      setActiveFilter(categoryParam);
+    } else {
+      setActiveFilter('All');
+    }
+  }, [categoryParam]);
+
+  // Ambil nama kategori dari database, bukan dari data program
+  const dbCategories = categoriesData ? categoriesData.map((c: any) => c.name) : [];
+  // Gabungkan jika ada kategori di program yang belum ada di database (opsional), tapi lebih baik fokus ke DB
+  const categories = ['All', ...Array.from(new Set([...dbCategories, ...programsData.map(p => p.category)]))];
+  
   const filteredData = activeFilter === 'All' ? programsData : programsData.filter(p => p.category === activeFilter);
 
   return (
@@ -46,5 +62,13 @@ export default function ProgramsList({ programsData }: { programsData: any[] }) 
         )}
       </div>
     </>
+  );
+}
+
+export default function ProgramsList({ programsData, categoriesData = [] }: { programsData: any[], categoriesData?: any[] }) {
+  return (
+    <Suspense fallback={<div className="h-96 flex items-center justify-center text-gray-500">Memuat program...</div>}>
+      <ProgramsListContent programsData={programsData} categoriesData={categoriesData} />
+    </Suspense>
   );
 }

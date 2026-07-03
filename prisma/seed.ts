@@ -23,7 +23,7 @@ async function main() {
 
   // 1. Kategori
   for (const cat of json.categoriesData) {
-    await prisma.category.create({ data: { id: cat.id, name: cat.name } })
+    await prisma.category.create({ data: { id: cat.id, name: cat.name, type: cat.type || 'KURSUS' } as any })
   }
   console.log(`Berhasil migrasi ${json.categoriesData.length} Kategori.`);
 
@@ -40,8 +40,9 @@ async function main() {
         discount_price: prog.discount_price,
         badge: prog.badge,
         category: prog.category,
-        level: prog.level
-      }
+        level: prog.level,
+        type: prog.type || 'KURSUS'
+      } as any
     })
   }
   console.log(`Berhasil migrasi ${json.programsData.length} Program Pelatihan.`);
@@ -103,8 +104,11 @@ async function main() {
       image: json.aboutData.image,
       vision: json.aboutData.vision,
       mission: JSON.stringify(json.aboutData.mission),
-      stats: JSON.stringify(json.aboutData.stats)
-    }
+      stats: JSON.stringify(json.aboutData.stats),
+      org_structure_image: json.aboutData.org_structure_image || null,
+      logo_philosophy: json.aboutData.logo_philosophy || null,
+      logo_usage: json.aboutData.logo_usage || null
+    } as any
   })
   console.log(`Berhasil migrasi Profil Lembaga (About).`);
 

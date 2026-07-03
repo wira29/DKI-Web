@@ -30,7 +30,8 @@ export default function CmsProgramDetail({ params }: { params: Promise<{ id: str
             discount_price: 0,
             badge: '',
             category: json.categoriesData?.[0]?.name || 'Uncategorized',
-            level: 'Beginner'
+            level: 'Beginner',
+            type: 'KURSUS'
           });
         } else {
           const found = json.programsData.find((p: any) => p.id === id);
@@ -132,13 +133,27 @@ export default function CmsProgramDetail({ params }: { params: Promise<{ id: str
 
           <div className="space-y-8">
             <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Jenis Program</label>
+              <select 
+                value={prog.type || 'KURSUS'} 
+                onChange={e => {
+                  setProg({...prog, type: e.target.value, category: data.categoriesData?.find((c: any) => c.type === e.target.value)?.name || ''});
+                }}
+                className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-black outline-none transition-all text-sm text-black bg-white"
+              >
+                <option value="KURSUS">Lembaga Kursus</option>
+                <option value="PELATIHAN_KERJA">Lembaga Pelatihan Kerja</option>
+              </select>
+            </div>
+            
+            <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
               <select 
                 value={prog.category} 
                 onChange={e => setProg({...prog, category: e.target.value})}
                 className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-black outline-none transition-all text-sm text-black bg-white"
               >
-                {data.categoriesData?.map((cat: any) => (
+                {data.categoriesData?.filter((c: any) => (c.type || 'KURSUS') === (prog.type || 'KURSUS')).map((cat: any) => (
                   <option key={cat.id} value={cat.name}>{cat.name}</option>
                 ))}
               </select>

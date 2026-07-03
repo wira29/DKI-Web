@@ -5,6 +5,7 @@ export const dynamic = 'force-dynamic';
 
 export default async function ProgramsPage() {
   const programsData = await prisma.program.findMany();
+  const categoriesData = await prisma.category.findMany();
 
   return (
     <div className="min-h-screen bg-[#FAFAFA] pt-32 pb-24">
@@ -15,7 +16,7 @@ export default async function ProgramsPage() {
             Pilih program yang sesuai dengan passion Anda dan mulailah membangun karir di industri teknologi melalui kurikulum intensif kami.
           </p>
         </div>
-        <ProgramsList programsData={programsData} />
+        <ProgramsList programsData={programsData} categoriesData={categoriesData} />
       </div>
     </div>
   );

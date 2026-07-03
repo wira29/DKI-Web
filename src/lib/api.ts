@@ -42,7 +42,7 @@ export async function saveCmsData(data: any) {
     if (data.categoriesData) {
       await prisma.category.deleteMany();
       for (const cat of data.categoriesData) {
-        await prisma.category.create({ data: { id: cat.id, name: cat.name } });
+        await prisma.category.create({ data: { id: cat.id, name: cat.name, type: cat.type || 'KURSUS' } as any });
       }
     }
 
@@ -61,8 +61,9 @@ export async function saveCmsData(data: any) {
             discount_price: prog.discount_price,
             badge: prog.badge,
             category: prog.category,
-            level: prog.level
-          }
+            level: prog.level,
+            type: prog.type || 'KURSUS'
+          } as any
         });
       }
     }
@@ -132,8 +133,11 @@ export async function saveCmsData(data: any) {
           image: data.aboutData.image,
           vision: data.aboutData.vision,
           mission: JSON.stringify(data.aboutData.mission),
-          stats: JSON.stringify(data.aboutData.stats)
-        }
+          stats: JSON.stringify(data.aboutData.stats),
+          org_structure_image: data.aboutData.org_structure_image,
+          logo_philosophy: data.aboutData.logo_philosophy,
+          logo_usage: data.aboutData.logo_usage
+        } as any
       });
     }
 

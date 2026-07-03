@@ -48,7 +48,10 @@
       "Menyediakan kurikulum berbasis industri terkini.",
       "Membangun ekosistem belajar yang kolaboratif.",
       "Memfasilitasi sertifikasi kompetensi berstandar nasional dan internasional."
-    ]
+    ],
+    "org_structure_image": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80",
+    "logo_philosophy": "<p>Bentuk elemen saling menyatu melambangkan kolaborasi, sedangkan warna biru dan cyan merepresentasikan kepercayaan serta teknologi mutakhir.</p>",
+    "logo_usage": "<ul><li>Selalu gunakan versi berwarna (*full color*) di latar belakang putih.</li><li>Gunakan warna putih (*monochrome*) jika latar belakang berwarna gelap/hitam.</li></ul>"
   },
   "programsData": [
     {
@@ -233,19 +236,23 @@
   "categoriesData": [
     {
       "id": "cat-1",
-      "name": "Coding"
+      "name": "Coding",
+      "type": "KURSUS"
     },
     {
       "id": "cat-2",
-      "name": "Digital Marketing"
+      "name": "Digital Marketing",
+      "type": "PELATIHAN_KERJA"
     },
     {
       "id": "cat-3",
-      "name": "IoT"
+      "name": "IoT",
+      "type": "KURSUS"
     },
     {
       "id": "cat-4",
-      "name": "Data"
+      "name": "Data",
+      "type": "PELATIHAN_KERJA"
     }
   ]
 }
