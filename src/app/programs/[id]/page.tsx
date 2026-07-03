@@ -5,6 +5,7 @@ import { ArrowLeft, CheckCircle2 } from 'lucide-react';
 export default async function ProgramDetail({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const prog = await prisma.program.findUnique({ where: { id } });
+  const footerData = await prisma.footerData.findFirst();
 
   if (!prog) {
     return (
@@ -18,7 +19,17 @@ export default async function ProgramDetail({ params }: { params: Promise<{ id: 
   }
 
   const whatsappMessage = `Halo DKI, saya tertarik untuk mendaftar program pelatihan: ${prog.title}. Mohon informasi pendaftarannya.`;
-  const whatsappUrl = `https://wa.me/6281234567890?text=${encodeURIComponent(whatsappMessage)}`;
+  
+  let waNumber = '6281234567890'; // default fallback
+  if (footerData && footerData.phone) {
+    let cleanPhone = footerData.phone.replace(/\D/g, '');
+    if (cleanPhone.startsWith('0')) {
+      cleanPhone = '62' + cleanPhone.substring(1);
+    }
+    waNumber = cleanPhone;
+  }
+
+  const whatsappUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 
   return (
     <div className="min-h-screen bg-[#FAFAFA] pt-32 pb-24">
