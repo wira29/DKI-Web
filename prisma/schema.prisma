@@ -1,0 +1,82 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id    String @id
+  name  String
+}
+
+model Program {
+  id                String  @id
+  title             String
+  short_description String  @db.Text
+  image             String  @db.Text
+  duration          String
+  price             Int
+  discount_price    Int?
+  badge             String?
+  category          String
+  level             String
+}
+
+model Certification {
+  id                String @id
+  title             String
+  short_description String @db.Text
+  image             String @db.Text
+  issuing_body      String
+  price             Int
+}
+
+model Testimonial {
+  id          String @id
+  name        String
+  photo       String @db.Text
+  program     String
+  testimonial String @db.Text
+  rating      Int
+  job_title   String
+  company     String
+}
+
+model Event {
+  id                String   @id
+  title             String
+  short_description String   @db.Text
+  image             String   @db.Text
+  event_date        DateTime
+  location_type     String
+  status            String
+}
+
+model AboutData {
+  id          Int    @id @default(1)
+  title       String
+  description String @db.Text
+  image       String @db.Text
+  vision      String @db.Text
+  mission     String @db.Text
+  stats       String @db.Text
+}
+
+model HeroSlide {
+  id       Int     @id @default(autoincrement())
+  title    String
+  subtitle String  @db.Text
+  image    String  @db.Text
+  type     String?
+}
+
+model FooterData {
+  id          Int    @id @default(1)
+  description String @db.Text
+  address     String @db.Text
+  email       String
+  phone       String
+}

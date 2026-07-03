@@ -1,0 +1,251 @@
+{
+  "heroStoryFrames": [
+    {
+      "id": 1,
+      "title": "Belajar Teknologi untuk Masa Depan.",
+      "subtitle": "Mulai perjalanan karir digitalmu bersama Digital Kompetensi Indonesia.",
+      "image": "https://images.unsplash.com/photo-1541888082699-23f2f5c717b9?auto=format&fit=crop&q=80",
+      "type": "building_exterior"
+    },
+    {
+      "id": 3,
+      "title": "Kelas Programming Modern",
+      "subtitle": "Belajar coding dengan kurikulum industri terbaru dan mentor berpengalaman.",
+      "image": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80",
+      "type": "programming_class"
+    },
+    {
+      "id": 6,
+      "title": "Sertifikasi Nasional",
+      "subtitle": "Raih sertifikat kompetensi yang diakui oleh industri untuk karir cemerlang.",
+      "image": "https://images.unsplash.com/photo-1523287562758-66c7fc58967f?auto=format&fit=crop&q=80",
+      "type": "certificate"
+    }
+  ],
+  "aboutData": {
+    "title": "Tentang Digital Kompetensi Indonesia",
+    "description": "Digital Kompetensi Indonesia (DKI) adalah lembaga pelatihan dan sertifikasi terkemuka yang berfokus pada pengembangan talenta digital di bidang Desain Grafis, Digital Marketing, IoT, dan Coding Anak Usia Dini.",
+    "image": "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80",
+    "stats": [
+      {
+        "label": "Alumni",
+        "value": "5000+",
+        "icon": "Users"
+      },
+      {
+        "label": "Program Pelatihan",
+        "value": "12+",
+        "icon": "BookOpen"
+      },
+      {
+        "label": "Mentor Expert",
+        "value": "50+",
+        "icon": "Award"
+      }
+    ],
+    "vision": "Menjadi pusat keunggulan utama dalam mencetak talenta digital berdaya saing global.",
+    "mission": [
+      "Menyediakan kurikulum berbasis industri terkini.",
+      "Membangun ekosistem belajar yang kolaboratif.",
+      "Memfasilitasi sertifikasi kompetensi berstandar nasional dan internasional."
+    ]
+  },
+  "programsData": [
+    {
+      "id": "prog-1",
+      "title": "Bootcamp Web Development",
+      "short_description": "Pelajari Fullstack Web Development dari nol hingga mahir dengan MERN/Next.js stack.",
+      "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80",
+      "duration": "3 Bulan",
+      "price": 3500000,
+      "discount_price": 2900000,
+      "badge": "Best Seller",
+      "category": "Coding",
+      "level": "Beginner to Advanced"
+    },
+    {
+      "id": "prog-2",
+      "title": "Mastering Internet of Things (IoT)",
+      "short_description": "Kuasai pemrograman mikrokontroler ESP32 dan Arduino untuk smart home & industry.",
+      "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80",
+      "duration": "2 Bulan",
+      "price": 2500000,
+      "badge": "New",
+      "category": "IoT",
+      "level": "Intermediate"
+    },
+    {
+      "id": "prog-3",
+      "title": "Digital Marketing Specialist",
+      "short_description": "Strategi SEO, SEM, Social Media Marketing, dan performa iklan yang terukur.",
+      "image": "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&q=80",
+      "duration": "2 Bulan",
+      "price": 2000000,
+      "category": "Digital Marketing",
+      "level": "Beginner"
+    },
+    {
+      "id": "prog-4",
+      "title": "Data Science & Machine Learning",
+      "short_description": "Olah big data dengan Python dan bangun model AI untuk memecahkan masalah bisnis nyata.",
+      "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80",
+      "duration": "4 Bulan",
+      "price": 4500000,
+      "badge": "Hot",
+      "category": "Data",
+      "level": "Intermediate to Advanced"
+    },
+    {
+      "id": "prog-5",
+      "title": "Cyber Security Analyst",
+      "short_description": "Belajar ethical hacking, penetration testing, dan perlindungan sistem keamanan jaringan.",
+      "image": "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&q=80",
+      "duration": "3 Bulan",
+      "price": 4000000,
+      "category": "Security",
+      "level": "Advanced"
+    },
+    {
+      "id": "prog-6",
+      "title": "Mobile App Dev with React Native",
+      "short_description": "Bangun aplikasi iOS dan Android dalam satu basis kode menggunakan framework React Native.",
+      "image": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80",
+      "duration": "2.5 Bulan",
+      "price": 3200000,
+      "category": "Coding",
+      "level": "Intermediate"
+    }
+  ],
+  "certificationsData": [
+    {
+      "id": "cert-1",
+      "title": "Sertifikasi BNSP Junior Web Developer",
+      "short_description": "Sertifikasi resmi dari Badan Nasional Sertifikasi Profesi untuk posisi Web Developer.",
+      "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80",
+      "issuing_body": "BNSP",
+      "price": 1500000
+    },
+    {
+      "id": "cert-2",
+      "title": "Sertifikasi Digital Marketing (Google)",
+      "short_description": "Sertifikasi profesi untuk keahlian spesialisasi Google Ads dan Analytics.",
+      "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80",
+      "issuing_body": "Google",
+      "price": 1200000
+    },
+    {
+      "id": "cert-3",
+      "title": "AWS Certified Cloud Practitioner",
+      "short_description": "Validasi pemahaman fundamental tentang layanan cloud Amazon Web Services (AWS).",
+      "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80",
+      "issuing_body": "Amazon Web Services",
+      "price": 2000000
+    },
+    {
+      "id": "cert-4",
+      "title": "MikroTik Certified Network Associate (MTCNA)",
+      "short_description": "Sertifikasi dasar untuk mengelola dan mendesain jaringan menggunakan MikroTik RouterOS.",
+      "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80",
+      "issuing_body": "MikroTik",
+      "price": 1800000
+    }
+  ],
+  "testimonialsData": [
+    {
+      "id": "testi-1",
+      "name": "Budi Santoso",
+      "photo": "https://randomuser.me/api/portraits/men/32.jpg",
+      "program": "Bootcamp Web Development",
+      "testimonial": "Sangat recommended! Kurikulum terupdate dan mentor sangat membantu saat error. Sekarang saya sudah bekerja sebagai Frontend Developer di startup Jakarta.",
+      "rating": 5,
+      "job_title": "Frontend Developer",
+      "company": "Tech Startup"
+    },
+    {
+      "id": "testi-2",
+      "name": "Siti Rahma",
+      "photo": "https://randomuser.me/api/portraits/women/44.jpg",
+      "program": "Digital Marketing Specialist",
+      "testimonial": "Pelatihannya sangat praktikal. Ilmu yang didapat bisa langsung diterapkan ke bisnis saya dan omset naik 50% di bulan pertama!",
+      "rating": 5,
+      "job_title": "Business Owner",
+      "company": "Rahma Shop"
+    },
+    {
+      "id": "testi-3",
+      "name": "Ahmad Faisal",
+      "photo": "https://randomuser.me/api/portraits/men/45.jpg",
+      "program": "Data Science & Machine Learning",
+      "testimonial": "Mentor sangat sabar membimbing dari nol. Proyek akhirnya sangat relevan dengan industri, sehingga saya langsung diterima bekerja sebelum lulus.",
+      "rating": 5,
+      "job_title": "Data Analyst",
+      "company": "Fintech Corp"
+    },
+    {
+      "id": "testi-4",
+      "name": "Nadia Putri",
+      "photo": "https://randomuser.me/api/portraits/women/65.jpg",
+      "program": "Mobile App Dev with React Native",
+      "testimonial": "Kurikulumnya padat dan to-the-point. Dalam 2 bulan saya berhasil membuat aplikasi yang kini sudah diunduh 10.000+ pengguna di Play Store.",
+      "rating": 5,
+      "job_title": "Mobile Developer",
+      "company": "Freelance"
+    }
+  ],
+  "eventsData": [
+    {
+      "id": "event-1",
+      "title": "Webinar: Tren Karir Tech 2026",
+      "short_description": "Persiapkan dirimu menghadapi perubahan tren teknologi dan AI di industri masa depan.",
+      "image": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80",
+      "event_date": "2026-08-15T09:00:00Z",
+      "location_type": "Online",
+      "status": "Upcoming"
+    },
+    {
+      "id": "event-2",
+      "title": "Hackathon Pelajar Nasional",
+      "short_description": "Ajang kompetisi membuat aplikasi inovatif untuk siswa SMA/SMK sederajat.",
+      "image": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80",
+      "event_date": "2026-09-01T08:00:00Z",
+      "location_type": "Offline",
+      "status": "Upcoming"
+    },
+    {
+      "id": "event-3",
+      "title": "Workshop: AI for Designers",
+      "short_description": "Pelajari bagaimana mengintegrasikan alat AI generatif ke dalam alur kerja UI/UX secara profesional.",
+      "image": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80",
+      "event_date": "2026-10-10T10:00:00Z",
+      "location_type": "Hybrid",
+      "status": "Upcoming"
+    },
+    {
+      "id": "event-4",
+      "title": "Sukses Berkarir Tanpa Gelar IT",
+      "short_description": "Sesi bincang santai bersama para alumni yang berhasil menembus startup ternama dengan modal bootcamp.",
+      "image": "https://images.unsplash.com/photo-1515169067868-5387ec356754?auto=format&fit=crop&q=80",
+      "event_date": "2026-10-25T15:00:00Z",
+      "location_type": "Online",
+      "status": "Upcoming"
+    }
+  ],
+  "categoriesData": [
+    {
+      "id": "cat-1",
+      "name": "Coding"
+    },
+    {
+      "id": "cat-2",
+      "name": "Digital Marketing"
+    },
+    {
+      "id": "cat-3",
+      "name": "IoT"
+    },
+    {
+      "id": "cat-4",
+      "name": "Data"
+    }
+  ]
+}
