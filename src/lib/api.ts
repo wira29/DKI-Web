@@ -114,9 +114,10 @@ export async function saveCmsData(data: any) {
             title: ev.title,
             short_description: ev.short_description,
             image: ev.image,
-            event_date: new Date(ev.event_date),
-            location_type: ev.location_type,
-            status: ev.status
+            event_date: ev.event_date ? new Date(ev.event_date) : null,
+            location_type: ev.location_type || null,
+            status: ev.status || null,
+            type: ev.type || 'EVENT'
           }
         });
       }

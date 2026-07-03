@@ -4,8 +4,25 @@ import Link from 'next/link';
 
 export default function EventsList({ eventsData }: { eventsData: any[] }) {
   const [activeFilter, setActiveFilter] = useState<string>('All');
-  const categories = ['All', ...Array.from(new Set(eventsData.map(e => e.location_type)))];
-  const filteredData = activeFilter === 'All' ? eventsData : eventsData.filter(e => e.location_type === activeFilter);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+
+  const categories = ['All', 'Acara', 'Artikel'];
+  
+  const filteredData = eventsData.filter(e => {
+    if (activeFilter === 'All') return true;
+    if (activeFilter === 'Acara' && e.type === 'EVENT') return true;
+    if (activeFilter === 'Artikel' && e.type === 'ARTICLE') return true;
+    return false;
+  });
+
+  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+  const paginatedData = filteredData.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 300, behavior: 'smooth' });
+  };
 
   return (
     <>
@@ -13,7 +30,10 @@ export default function EventsList({ eventsData }: { eventsData: any[] }) {
         {categories.map(cat => (
           <button
             key={cat}
-            onClick={() => setActiveFilter(cat)}
+            onClick={() => {
+              setActiveFilter(cat);
+              setCurrentPage(1);
+            }}
             className={`px-6 py-2.5 rounded-full text-sm font-medium transition-colors ${
               activeFilter === cat 
                 ? 'bg-black text-white' 
@@ -25,29 +45,95 @@ export default function EventsList({ eventsData }: { eventsData: any[] }) {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-        {filteredData.map(event => (
-          <Link key={event.id} href={`/events/${event.id}`} className="group cursor-pointer block">
-            <div className="relative overflow-hidden rounded-3xl mb-8 aspect-[16/10] md:aspect-video bg-gray-100">
-              <img 
-                src={event.image} 
-                alt={event.title} 
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
-              />
+      <div className="flex flex-col gap-8">
+        {paginatedData.map(event => (
+          <Link key={event.id} href={`/events/${event.id}`} className="group cursor-pointer block border-b border-gray-100 pb-8 last:border-0 last:pb-0">
+            <div className="flex flex-col md:flex-row gap-8 items-start">
+              <div className="w-full md:w-1/3 aspect-video bg-gray-100 rounded-2xl overflow-hidden shrink-0 relative">
+                <img 
+                  src={event.image} 
+                  alt={event.title} 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
+                />
+                <div className="absolute top-4 left-4">
+                  <span className={`px-3 py-1.5 rounded-md text-xs font-semibold text-white shadow-sm ${event.type === 'ARTICLE' ? 'bg-blue-600' : 'bg-black'}`}>
+                    {event.type === 'ARTICLE' ? 'Artikel' : 'Acara'}
+                  </span>
+                </div>
+              </div>
+              
+              <div className="flex-1 flex flex-col justify-center py-2">
+                <div className="flex items-center gap-3 text-xs text-gray-400 font-medium mb-3 uppercase tracking-wider">
+                  {event.event_date && (
+                    <span>{new Date(event.event_date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+                  )}
+                  {event.location_type && event.type === 'EVENT' && (
+                    <>
+                      <span>&bull;</span>
+                      <span>{event.location_type}</span>
+                    </>
+                  )}
+                </div>
+                
+                <h3 className="text-2xl font-bold text-black mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
+                  {event.title}
+                </h3>
+                
+                <p className="text-gray-500 font-light leading-relaxed line-clamp-3 mb-6">
+                  {event.short_description?.replace(/<[^>]+>/g, '') || ''}
+                </p>
+                
+                <div className="mt-auto">
+                  <span className="text-sm font-semibold text-black group-hover:text-blue-600 flex items-center gap-2 transition-colors">
+                    Baca Selengkapnya &rarr;
+                  </span>
+                </div>
+              </div>
             </div>
-            <div className="flex items-center gap-3 text-sm text-gray-400 font-medium mb-4 uppercase tracking-wider">
-              <span>{new Date(event.event_date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long' })}</span>
-              <span>&bull;</span>
-              <span>{event.location_type}</span>
-            </div>
-            <h3 className="text-3xl font-semibold text-black mb-4 tracking-tight group-hover:opacity-70 transition-opacity">{event.title}</h3>
-            <p className="text-gray-500 font-light leading-relaxed">{event.short_description}</p>
           </Link>
         ))}
+
         {filteredData.length === 0 && (
-          <div className="col-span-full py-20 text-center text-gray-500">Tidak ada acara untuk kategori ini.</div>
+          <div className="py-20 text-center text-gray-500">Belum ada konten untuk kategori ini.</div>
         )}
       </div>
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div className="flex justify-center items-center gap-2 mt-16 pt-8 border-t border-gray-100">
+          <button 
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            className="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 bg-gray-50 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          >
+            Sebelumnya
+          </button>
+          
+          <div className="flex gap-2">
+            {Array.from({ length: totalPages }).map((_, i) => (
+              <button
+                key={i}
+                onClick={() => handlePageChange(i + 1)}
+                className={`w-10 h-10 rounded-lg text-sm font-medium transition-colors flex items-center justify-center ${
+                  currentPage === i + 1 
+                    ? 'bg-black text-white' 
+                    : 'bg-gray-50 text-gray-600 hover:bg-gray-100'
+                }`}
+              >
+                {i + 1}
+              </button>
+            ))}
+          </div>
+
+          <button 
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 bg-gray-50 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          >
+            Selanjutnya
+          </button>
+        </div>
+      )}
     </>
   );
 }

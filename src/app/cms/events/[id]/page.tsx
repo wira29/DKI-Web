@@ -27,7 +27,8 @@ export default function CmsEventDetail({ params }: { params: Promise<{ id: strin
             image: '',
             event_date: new Date().toISOString(),
             location_type: 'Online',
-            status: 'Upcoming'
+            status: 'Upcoming',
+            type: 'EVENT'
           });
         } else {
           const found = json.eventsData.find((p: any) => p.id === id);
@@ -127,45 +128,61 @@ export default function CmsEventDetail({ params }: { params: Promise<{ id: strin
             />
           </div>
 
-          <div className="space-y-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Tipe Lokasi</label>
-              <select 
-                value={ev.location_type} 
-                onChange={e => setEv({...ev, location_type: e.target.value})}
-                className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-black outline-none transition-all text-sm text-black bg-white"
-              >
-                <option value="Online">Online</option>
-                <option value="Offline">Offline</option>
-                <option value="Hybrid">Hybrid</option>
-              </select>
-            </div>
+          <div className="md:col-span-2">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Tipe Konten</label>
+            <select 
+              value={ev.type || 'EVENT'} 
+              onChange={e => setEv({...ev, type: e.target.value})}
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-black outline-none transition-all text-sm text-black bg-white"
+            >
+              <option value="EVENT">Acara (Memiliki Jadwal & Lokasi)</option>
+              <option value="ARTICLE">Artikel / Berita</option>
+            </select>
           </div>
 
-          <div className="space-y-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Tanggal & Waktu (ISO String)</label>
-              <input 
-                type="text" 
-                value={ev.event_date} 
-                onChange={e => setEv({...ev, event_date: e.target.value})}
-                placeholder="2026-08-15T09:00:00Z"
-                className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-black outline-none transition-all text-sm text-black"
-              />
-            </div>
-            
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
-              <select 
-                value={ev.status} 
-                onChange={e => setEv({...ev, status: e.target.value})}
-                className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-black outline-none transition-all text-sm text-black bg-white"
-              >
-                <option value="Upcoming">Upcoming</option>
-                <option value="Completed">Completed</option>
-              </select>
-            </div>
-          </div>
+          {(ev.type === 'EVENT' || !ev.type) && (
+            <>
+              <div className="space-y-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Tipe Lokasi</label>
+                  <select 
+                    value={ev.location_type || 'Online'} 
+                    onChange={e => setEv({...ev, location_type: e.target.value})}
+                    className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-black outline-none transition-all text-sm text-black bg-white"
+                  >
+                    <option value="Online">Online</option>
+                    <option value="Offline">Offline</option>
+                    <option value="Hybrid">Hybrid</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="space-y-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Tanggal & Waktu (ISO String)</label>
+                  <input 
+                    type="text" 
+                    value={ev.event_date || ''} 
+                    onChange={e => setEv({...ev, event_date: e.target.value})}
+                    placeholder="2026-08-15T09:00:00Z"
+                    className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-black outline-none transition-all text-sm text-black"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                  <select 
+                    value={ev.status || 'Upcoming'} 
+                    onChange={e => setEv({...ev, status: e.target.value})}
+                    className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-black outline-none transition-all text-sm text-black bg-white"
+                  >
+                    <option value="Upcoming">Upcoming</option>
+                    <option value="Completed">Completed</option>
+                  </select>
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

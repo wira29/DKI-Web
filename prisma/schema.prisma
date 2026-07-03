@@ -52,9 +52,10 @@ model Event {
   title             String
   short_description String   @db.Text
   image             String   @db.Text
-  event_date        DateTime
-  location_type     String
-  status            String
+  event_date        DateTime?
+  location_type     String?
+  status            String?
+  type              String   @default("EVENT") // "EVENT" or "ARTICLE"
 }
 
 model AboutData {
