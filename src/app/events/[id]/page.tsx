@@ -1,12 +1,13 @@
 import { prisma } from '@/lib/db';
-import Link from 'next/link';
 import { ArrowLeft, Calendar, MapPin } from 'lucide-react';
+import Link from 'next/link';
 
 export default async function EventDetail({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const event = await prisma.event.findUnique({
     where: { id }
   });
+  const footerData = await prisma.footerData.findFirst();
 
   if (!event) {
     return (
@@ -20,8 +21,19 @@ export default async function EventDetail({ params }: { params: Promise<{ id: st
   }
 
   const whatsappMessage = `Halo DKI, saya tertarik untuk mengikuti acara: ${event.title}. Mohon informasi pendaftarannya.`;
-  const whatsappUrl = `https://wa.me/6281234567890?text=${encodeURIComponent(whatsappMessage)}`;
-  const whatsappUrl = `https://wa.me/6281234567890?text=${encodeURIComponent(whatsappMessage)}`;
+  
+  let waNumber = '6281234567890'; // default fallback
+  if (footerData && footerData.phone) {
+    // Bersihkan karakter non-digit (seperti spasi, strip, tanda kurung)
+    let cleanPhone = footerData.phone.replace(/\D/g, '');
+    // Jika diawali angka 0, ganti dengan 62
+    if (cleanPhone.startsWith('0')) {
+      cleanPhone = '62' + cleanPhone.substring(1);
+    }
+    waNumber = cleanPhone;
+  }
+
+  const whatsappUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(whatsappMessage)}`;
   const dateFormatted = event.event_date ? new Date(event.event_date).toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) : '';
   const timeFormatted = event.event_date ? new Date(event.event_date).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) + ' WIB' : '';
 
