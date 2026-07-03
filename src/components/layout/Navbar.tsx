@@ -25,7 +25,8 @@ export default function Navbar({ categories = [] }: { categories?: any[] }) {
         return;
       }
       const scrollY = window.scrollY;
-      const threshold = 8.8 * window.innerHeight; 
+      const multiplier = window.innerWidth >= 768 ? 3.9 : 2.4; 
+      const threshold = multiplier * window.innerHeight; 
       setIsScrolledPastHero(scrollY > threshold);
     };
 
