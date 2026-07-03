@@ -8,6 +8,7 @@ import { getCmsData } from '@/lib/api';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://digitalkompetensi.id'),
   title: {
     template: '%s | Digital Kompetensi Indonesia',
     default: 'Digital Kompetensi Indonesia (DKI) - Lembaga Kursus & Pelatihan',
@@ -17,10 +18,27 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Digital Kompetensi Indonesia (DKI)',
     description: 'Lembaga Pelatihan Kerja (LPK) & Sertifikasi Kompetensi terkemuka.',
-    url: 'https://www.digitalkompetensi.id',
+    url: 'https://digitalkompetensi.id',
     siteName: 'Digital Kompetensi Indonesia',
     locale: 'id_ID',
     type: 'website',
+    images: [
+      {
+        url: '/logo.png',
+        width: 1200,
+        height: 630,
+        alt: 'Digital Kompetensi Indonesia',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Digital Kompetensi Indonesia (DKI)',
+    description: 'Lembaga Pelatihan Kerja (LPK) & Sertifikasi Kompetensi terkemuka.',
+    images: ['/logo.png'],
+  },
+  alternates: {
+    canonical: '/',
   },
   robots: {
     index: true,
@@ -47,8 +65,8 @@ export default async function RootLayout({
     '@context': 'https://schema.org',
     '@type': 'EducationalOrganization',
     name: 'Digital Kompetensi Indonesia',
-    url: 'https://www.digitalkompetensi.id',
-    logo: 'https://www.digitalkompetensi.id/icon.png',
+    url: 'https://digitalkompetensi.id',
+    logo: 'https://digitalkompetensi.id/icon.png',
     description: 'Lembaga Pelatihan Kerja (LPK), Kursus, dan Sertifikasi Kompetensi terkemuka di bidang digital.',
     sameAs: [
       'https://www.facebook.com/digitalkompetensi',
