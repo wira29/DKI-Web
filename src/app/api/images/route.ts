@@ -41,3 +41,25 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Failed to upload file' }, { status: 500 });
   }
 }
+
+export async function DELETE(request: Request) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const filename = searchParams.get('filename');
+    if (!filename) return NextResponse.json({ error: 'Filename missing' }, { status: 400 });
+
+    const safeFilename = path.basename(filename);
+    const publicDir = path.join(process.cwd(), 'public');
+    const filePath = path.join(publicDir, safeFilename);
+
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath);
+      return NextResponse.json({ success: true });
+    } else {
+      return NextResponse.json({ error: 'File not found' }, { status: 404 });
+    }
+  } catch (error) {
+    console.error('Delete error:', error);
+    return NextResponse.json({ error: 'Failed to delete file' }, { status: 500 });
+  }
+}

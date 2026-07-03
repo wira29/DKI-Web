@@ -30,7 +30,7 @@ export default async function StrukturPage() {
            <img 
             src={about.org_structure_image} 
             alt="Struktur Organisasi" 
-            className="w-full h-auto max-w-6xl mix-blend-multiply" 
+            className="w-full h-auto max-w-6xl rounded-2xl shadow-sm" 
            />
          </div>
       </section>
