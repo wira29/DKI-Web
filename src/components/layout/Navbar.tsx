@@ -150,6 +150,7 @@ export default function Navbar({ categories = [] }: { categories?: any[] }) {
           
           <div className="flex md:hidden items-center">
             <button 
+              aria-label="Buka menu navigasi"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
               className={`p-2 rounded-md ${isScrolledPastHero ? 'text-black' : 'text-white'}`}
             >
