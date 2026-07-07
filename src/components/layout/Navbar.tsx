@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { Menu, X, ChevronDown, ChevronRight } from 'lucide-react';
 
 export default function Navbar({ categories = [] }: { categories?: any[] }) {
@@ -67,7 +68,7 @@ export default function Navbar({ categories = [] }: { categories?: any[] }) {
                 isScrolledPastHero ? 'text-black' : 'text-white drop-shadow-md'
               }`}
             >
-              <img src="/logo.png" alt="Logo DKI" className="h-9 w-auto rounded-sm object-contain bg-transparent" />
+              <Image src="/logo.png" alt="Logo DKI" width={36} height={36} className="h-9 w-auto rounded-sm object-contain bg-transparent" priority />
               <span>DKI</span>
             </Link>
           </div>

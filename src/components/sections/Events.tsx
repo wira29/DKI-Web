@@ -28,10 +28,10 @@ export default function Events({ data: eventsData = [] }: { data?: any[] }) {
                 Lihat Semua <ArrowRight className="w-4 h-4" />
               </Link>
               <div className="flex gap-4">
-                <button onClick={() => scroll('left')} className="p-3 rounded-full bg-[#FAFAFA] border border-gray-200 hover:bg-gray-100 transition-colors">
+                <button aria-label="Sebelumnya" onClick={() => scroll('left')} className="p-3 rounded-full bg-[#FAFAFA] border border-gray-200 hover:bg-gray-100 transition-colors">
                   <ChevronLeft className="w-5 h-5 text-black" />
                 </button>
-                <button onClick={() => scroll('right')} className="p-3 rounded-full bg-[#FAFAFA] border border-gray-200 hover:bg-gray-100 transition-colors">
+                <button aria-label="Selanjutnya" onClick={() => scroll('right')} className="p-3 rounded-full bg-[#FAFAFA] border border-gray-200 hover:bg-gray-100 transition-colors">
                   <ChevronRight className="w-5 h-5 text-black" />
                 </button>
               </div>

@@ -88,8 +88,8 @@ export default async function RootLayout({
         <Navbar categories={categories} />
         <main>{children}</main>
         <Footer />
-        <Script src="https://www.googletagmanager.com/gtag/js?id=G-MYF6M99EF3" strategy="afterInteractive" />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-MYF6M99EF3" strategy="lazyOnload" />
+        <Script id="google-analytics" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}

@@ -23,10 +23,10 @@ export default function Testimonials({ data: testimonialsData = [] }: { data?: a
           <div className="flex justify-between items-end mb-20">
             <h2 className="text-3xl md:text-5xl font-semibold text-black tracking-tight">Cerita Sukses.</h2>
             <div className="flex gap-4">
-              <button onClick={() => scroll('left')} className="p-3 rounded-full bg-white border border-gray-200 hover:bg-gray-50 transition-colors">
+              <button aria-label="Sebelumnya" onClick={() => scroll('left')} className="p-3 rounded-full bg-white border border-gray-200 hover:bg-gray-50 transition-colors">
                 <ChevronLeft className="w-5 h-5 text-black" />
               </button>
-              <button onClick={() => scroll('right')} className="p-3 rounded-full bg-white border border-gray-200 hover:bg-gray-50 transition-colors">
+              <button aria-label="Selanjutnya" onClick={() => scroll('right')} className="p-3 rounded-full bg-white border border-gray-200 hover:bg-gray-50 transition-colors">
                 <ChevronRight className="w-5 h-5 text-black" />
               </button>
             </div>
@@ -46,7 +46,7 @@ export default function Testimonials({ data: testimonialsData = [] }: { data?: a
                 <div className="flex items-center gap-4 mt-auto">
                   <img src={testi.photo} alt={testi.name} className="w-12 h-12 rounded-full object-cover" />
                   <div>
-                    <h4 className="font-semibold text-black text-sm">{testi.name}</h4>
+                    <h3 className="font-semibold text-black text-sm">{testi.name}</h3>
                     <p className="text-xs text-gray-500">{testi.job_title} di {testi.company}</p>
                   </div>
                 </div>

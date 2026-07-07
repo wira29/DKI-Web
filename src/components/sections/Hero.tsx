@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Hero({ frames = [] }: { frames: any[] }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -30,10 +31,15 @@ export default function Hero({ frames = [] }: { frames: any[] }) {
               transition={{ duration: 1.5, ease: "easeInOut" }}
             >
               {/* Background Image */}
-              <div 
-                className="absolute inset-0 bg-cover bg-center"
-                style={{ backgroundImage: `url(${frame.image})` }}
-              />
+              <div className="absolute inset-0">
+                <Image 
+                  src={frame.image} 
+                  alt={frame.title || "Background"}
+                  fill
+                  priority={index === 0}
+                  className="object-cover object-center"
+                />
+              </div>
               <div className="absolute inset-0 bg-black/60" />
               
               {/* Content */}
