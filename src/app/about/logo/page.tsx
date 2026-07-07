@@ -21,7 +21,7 @@ export default async function LogoPage() {
           
           {/* Gambar Logo */}
           <div className="w-full aspect-square bg-white border border-gray-100 rounded-[3rem] shadow-sm flex items-center justify-center p-12 lg:sticky lg:top-32">
-            <img src="/logo.png" alt="Logo DKI" className="w-full h-auto object-contain max-w-xs" />
+            <img src="/logo.webp" alt="Logo DKI" className="w-full h-auto object-contain max-w-xs" />
           </div>
           
           {/* Teks Penjelasan */}

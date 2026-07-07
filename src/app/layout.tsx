@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/logo.png',
+        url: '/logo.webp',
         width: 1200,
         height: 630,
         alt: 'Digital Kompetensi Indonesia',
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Digital Kompetensi Indonesia (DKI)',
     description: 'Lembaga Pelatihan Kerja (LPK) & Sertifikasi Kompetensi terkemuka.',
-    images: ['/logo.png'],
+    images: ['/logo.webp'],
   },
   alternates: {
     canonical: '/',

@@ -68,7 +68,7 @@ export default function Navbar({ categories = [] }: { categories?: any[] }) {
                 isScrolledPastHero ? 'text-black' : 'text-white drop-shadow-md'
               }`}
             >
-              <Image src="/logo.png" alt="Logo DKI" width={36} height={36} className="h-9 w-auto rounded-sm object-contain bg-transparent" priority />
+              <Image src="/logo.webp" alt="Logo DKI" width={36} height={36} className="h-9 w-auto rounded-sm object-contain bg-transparent" priority />
               <span>DKI</span>
             </Link>
           </div>
