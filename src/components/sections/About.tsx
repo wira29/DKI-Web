@@ -1,4 +1,5 @@
 import FadeIn from '../ui/FadeIn';
+import Image from 'next/image';
 
 export default function About({ data: aboutData }: { data: any }) {
   if (!aboutData) return null;
@@ -25,10 +26,12 @@ export default function About({ data: aboutData }: { data: any }) {
               </div>
             </div>
             <div className="relative rounded-3xl overflow-hidden bg-gray-100 aspect-square">
-              <img 
+              <Image 
                 src={aboutData.image || "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80"} 
                 alt={aboutData.title || "Students collaborating"} 
-                className="object-cover w-full h-full"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
               />
             </div>
           </div>

@@ -48,7 +48,7 @@ export default function Hero({ frames = [] }: { frames: any[] }) {
                   <motion.h1 
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5, duration: 0.8 }}
+                    transition={{ delay: index === 0 ? 0 : 0.5, duration: 0.8 }}
                     className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 drop-shadow-lg text-center"
                   >
                     {frame.title}
@@ -56,7 +56,7 @@ export default function Hero({ frames = [] }: { frames: any[] }) {
                   <motion.p 
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.7, duration: 0.8 }}
+                    transition={{ delay: index === 0 ? 0.2 : 0.7, duration: 0.8 }}
                     className="text-lg md:text-2xl text-gray-200 mb-8 max-w-3xl text-center mx-auto drop-shadow-md"
                   >
                     {frame.subtitle}
