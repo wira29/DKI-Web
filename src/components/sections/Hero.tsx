@@ -1,7 +1,6 @@
-'use client';
-
 import * as Icons from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Hero({ frames = [], features = [] }: { frames?: any[], features?: any[] }) {
   const frame = frames.length > 0 ? frames[0] : {
@@ -83,10 +82,13 @@ export default function Hero({ frames = [], features = [] }: { frames?: any[], f
             
             <div className="relative z-10 w-[85%] md:w-[75%] aspect-[5/4] max-w-[450px]">
               {/* Dummy Image representing the 3 people */}
-              <img 
+              <Image 
                 src={frame.image} 
                 alt="Mentors and Students" 
-                className="w-full h-full object-cover rounded-3xl shadow-2xl"
+                className="object-cover rounded-3xl shadow-2xl"
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
               
               {/* Floating Badge 1: User Aktif */}
