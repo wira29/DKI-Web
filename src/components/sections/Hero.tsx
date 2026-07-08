@@ -1,6 +1,6 @@
 import * as Icons from 'lucide-react';
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Hero({ frames = [], features = [] }: { frames?: any[], features?: any[] }) {
   const frame = frames.length > 0 ? frames[0] : {
@@ -11,7 +11,7 @@ export default function Hero({ frames = [], features = [] }: { frames?: any[], f
   };
 
   return (
-    <section className="relative bg-primary pt-26 pb-8 overflow-hidden font-sans">
+    <section className="relative h-[100vh] bg-primary pt-26 pb-8 overflow-hidden font-sans">
       {/* Subtle Grid Background Pattern */}
       <div 
         className="absolute inset-0 opacity-[0.04] pointer-events-none" 
