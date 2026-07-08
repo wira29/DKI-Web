@@ -1,6 +1,24 @@
 import { prisma } from '@/lib/db';
 import Link from 'next/link';
 import { ArrowLeft, CheckCircle2 } from 'lucide-react';
+import { Metadata } from 'next';
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params;
+  const cert = await prisma.certification.findUnique({ where: { id } });
+  
+  if (!cert) return { title: 'Sertifikasi Tidak Ditemukan' };
+
+  return {
+    title: cert.title,
+    description: cert.short_description,
+    openGraph: {
+      title: cert.title,
+      description: cert.short_description,
+      images: [cert.image],
+    }
+  };
+}
 
 export default async function CertificationDetail({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;

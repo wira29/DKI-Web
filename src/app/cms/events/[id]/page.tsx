@@ -42,10 +42,16 @@ export default function CmsEventDetail({ params }: { params: Promise<{ id: strin
 
   const handleSave = async () => {
     setIsSaving(true);
-    const newData = { ...data };
+    // Ensure we create a new array so we don't mutate the existing state directly
+    const newData = { ...data, eventsData: [...data.eventsData] };
     
     if (id === 'new') {
-      newData.eventsData.push(ev);
+      const existingIndex = newData.eventsData.findIndex((p: any) => p.id === ev.id);
+      if (existingIndex !== -1) {
+        newData.eventsData[existingIndex] = ev;
+      } else {
+        newData.eventsData.push(ev);
+      }
     } else {
       const index = newData.eventsData.findIndex((p: any) => p.id === ev.id);
       if (index !== -1) {
@@ -92,7 +98,7 @@ export default function CmsEventDetail({ params }: { params: Promise<{ id: strin
           <button 
             onClick={handleSave}
             disabled={isSaving}
-            className="bg-black text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-gray-800 transition-colors flex items-center gap-2 disabled:opacity-70"
+            className="bg-primary text-white px-6 py-2.5 rounded-xl text-sm font-medium hover:bg-gray-800 transition-colors flex items-center gap-2 disabled:opacity-70"
           >
             {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
             Simpan Acara

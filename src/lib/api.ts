@@ -7,9 +7,11 @@ export async function getCmsData() {
     const programsData = await prisma.program.findMany();
     const certificationsData = await prisma.certification.findMany();
     const testimonialsData = await prisma.testimonial.findMany();
-    const eventsData = await prisma.event.findMany();
+    const postsData = await prisma.post.findMany();
     const categoriesData = await prisma.category.findMany();
     const footerData = await prisma.footerData.findFirst();
+    const heroFeaturesData = await prisma.heroFeature.findMany();
+    const partnersData = await prisma.partner.findMany();
 
     const aboutData = aboutDataDb ? {
       ...aboutDataDb,
@@ -23,9 +25,11 @@ export async function getCmsData() {
       programsData,
       certificationsData,
       testimonialsData,
-      eventsData,
+      postsData,
       categoriesData,
-      footerData
+      footerData,
+      heroFeaturesData,
+      partnersData
     };
   } catch (error) {
     console.error('Failed to read from Database', error);
@@ -104,20 +108,25 @@ export async function saveCmsData(data: any) {
       }
     }
 
-    // 5. Acara & Berita
-    if (data.eventsData) {
-      await prisma.event.deleteMany();
-      for (const ev of data.eventsData) {
-        await prisma.event.create({
+    // 5. Artikel & Berita
+    if (data.postsData) {
+      await prisma.post.deleteMany();
+      for (const post of data.postsData) {
+        let parsedDate = null;
+        if (post.published_at) {
+          const d = new Date(post.published_at);
+          if (!isNaN(d.getTime())) {
+            parsedDate = d;
+          }
+        }
+        await prisma.post.create({
           data: {
-            id: ev.id,
-            title: ev.title,
-            short_description: ev.short_description,
-            image: ev.image,
-            event_date: ev.event_date ? new Date(ev.event_date) : null,
-            location_type: ev.location_type || null,
-            status: ev.status || null,
-            type: ev.type || 'EVENT'
+            id: post.id,
+            title: post.title,
+            short_description: post.short_description,
+            image: post.image,
+            published_at: parsedDate || new Date(),
+            type: post.type || 'BERITA'
           }
         });
       }
@@ -143,18 +152,18 @@ export async function saveCmsData(data: any) {
     }
 
     // 7. Hero Slide
-    if (data.heroStoryFrames) {
+    if (data.heroStoryFrames && data.heroStoryFrames.length > 0) {
       await prisma.heroSlide.deleteMany();
-      for (const frame of data.heroStoryFrames) {
-        await prisma.heroSlide.create({
-          data: {
-            title: frame.title,
-            subtitle: frame.subtitle,
-            image: frame.image,
-            type: frame.type
-          }
-        });
-      }
+      const frame = data.heroStoryFrames[0];
+      await prisma.heroSlide.create({
+        data: {
+          title: frame.title,
+          subtitle: frame.subtitle,
+          tagline: frame.tagline,
+          image: frame.image,
+          type: frame.type || 'image'
+        }
+      });
     }
 
     // 8. Footer Data
@@ -169,6 +178,38 @@ export async function saveCmsData(data: any) {
           phone: data.footerData.phone
         }
       });
+    }
+
+    // 9. Hero Features
+    if (data.heroFeaturesData) {
+      await prisma.heroFeature.deleteMany();
+      for (const feature of data.heroFeaturesData) {
+        await prisma.heroFeature.create({
+          data: {
+            title: feature.title,
+            icon: feature.icon,
+            link: feature.link
+          }
+        });
+      }
+    }
+
+    // 10. Mitra & Teknologi (Partners)
+    if (data.partnersData) {
+      await prisma.partner.deleteMany();
+      for (const partner of data.partnersData) {
+        await prisma.partner.create({
+          data: {
+            id: partner.id,
+            name: partner.name,
+            description: partner.description,
+            icon: partner.icon || null,
+            logo: partner.logo || null,
+            color: partner.color || null,
+            row: partner.row
+          }
+        });
+      }
     }
 
     return true;

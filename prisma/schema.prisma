@@ -16,8 +16,8 @@ model Category {
 model Program {
   id                String  @id
   title             String
-  short_description String  @db.Text
-  image             String  @db.Text
+  short_description String  @db.LongText
+  image             String  @db.LongText
   duration          String
   price             Int
   discount_price    Int?
@@ -30,8 +30,8 @@ model Program {
 model Certification {
   id                String @id
   title             String
-  short_description String @db.Text
-  image             String @db.Text
+  short_description String @db.LongText
+  image             String @db.LongText
   issuing_body      String
   price             Int
 }
@@ -39,50 +39,76 @@ model Certification {
 model Testimonial {
   id          String @id
   name        String
-  photo       String @db.Text
+  photo       String @db.LongText
   program     String
-  testimonial String @db.Text
+  testimonial String @db.LongText
   rating      Int
   job_title   String
   company     String
 }
 
-model Event {
+model Post {
   id                String   @id
   title             String
-  short_description String   @db.Text
-  image             String   @db.Text
-  event_date        DateTime?
-  location_type     String?
-  status            String?
-  type              String   @default("EVENT") // "EVENT" or "ARTICLE"
+  short_description String   @db.LongText
+  image             String   @db.LongText
+  published_at      DateTime @default(now())
+  type              String   @default("BERITA") // "BERITA" or "ARTIKEL"
 }
 
 model AboutData {
   id          Int    @id @default(1)
   title       String
-  description String @db.Text
-  image       String @db.Text
-  vision              String  @db.Text
-  mission             String  @db.Text
-  stats               String  @db.Text
-  org_structure_image String? @db.Text
-  logo_philosophy     String? @db.Text
-  logo_usage          String? @db.Text
+  description String @db.LongText
+  image       String @db.LongText
+  vision              String  @db.LongText
+  mission             String  @db.LongText
+  stats               String  @db.LongText
+  org_structure_image String? @db.LongText
+  logo_philosophy     String? @db.LongText
+  logo_usage          String? @db.LongText
 }
 
 model HeroSlide {
   id       Int     @id @default(autoincrement())
   title    String
-  subtitle String  @db.Text
-  image    String  @db.Text
+  subtitle String  @db.LongText
+  tagline  String?
+  image    String  @db.LongText
   type     String?
+}
+
+model HeroFeature {
+  id    Int    @id @default(autoincrement())
+  title String
+  icon  String
+  link  String
 }
 
 model FooterData {
   id          Int    @id @default(1)
-  description String @db.Text
-  address     String @db.Text
+  description String @db.LongText
+  address     String @db.LongText
   email       String
   phone       String
+}
+
+model Partner {
+  id          String @id
+  name        String
+  description String @db.LongText
+  icon        String?
+  logo        String? @db.LongText
+  color       String?
+  row         String @default("TOP") // "TOP" or "BOTTOM"
+}
+
+model ContactMessage {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  subject   String
+  message   String   @db.LongText
+  createdAt DateTime @default(now())
+  isRead    Boolean  @default(false)
 }

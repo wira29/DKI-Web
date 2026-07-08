@@ -1,13 +1,17 @@
 'use client';
 import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
+import Image from 'next/image';
+import { ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
+import FadeIn from './FadeIn';
 
 function ProgramsListContent({ programsData, categoriesData }: { programsData: any[], categoriesData: any[] }) {
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get('category');
   const [activeFilter, setActiveFilter] = useState<string>(categoryParam || 'All');
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 9;
 
   useEffect(() => {
     if (categoryParam) {
@@ -15,7 +19,13 @@ function ProgramsListContent({ programsData, categoriesData }: { programsData: a
     } else {
       setActiveFilter('All');
     }
+    setCurrentPage(1); // Reset to page 1 on filter change via params
   }, [categoryParam]);
+
+  const handleFilterChange = (cat: string) => {
+    setActiveFilter(cat);
+    setCurrentPage(1); // Reset to page 1 when clicking filter
+  };
 
   // Ambil nama kategori dari database, bukan dari data program
   const dbCategories = categoriesData ? categoriesData.map((c: any) => c.name) : [];
@@ -23,45 +33,123 @@ function ProgramsListContent({ programsData, categoriesData }: { programsData: a
   const categories = ['All', ...Array.from(new Set([...dbCategories, ...programsData.map(p => p.category)]))];
   
   const filteredData = activeFilter === 'All' ? programsData : programsData.filter(p => p.category === activeFilter);
+  const totalPages = Math.ceil(filteredData.length / ITEMS_PER_PAGE);
+  const paginatedData = filteredData.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
   return (
-    <>
-      <div className="flex flex-wrap gap-3 mb-12 border-b border-black/[0.04] pb-8">
-        {categories.map(cat => (
-          <button
-            key={cat}
-            onClick={() => setActiveFilter(cat)}
-            className={`px-6 py-2.5 rounded-full text-sm font-medium transition-colors ${
-              activeFilter === cat 
-                ? 'bg-black text-white' 
-                : 'bg-white text-gray-500 hover:bg-gray-100 hover:text-black border border-black/[0.04]'
-            }`}
-          >
-            {cat}
-          </button>
-        ))}
+    <div className="flex flex-col lg:flex-row gap-8">
+      {/* Sidebar Filters */}
+      <div className="w-full lg:w-1/4 shrink-0">
+        <div className="bg-white rounded-3xl p-6 border border-black/[0.04] sticky top-24">
+          <h3 className="text-lg font-semibold text-black mb-4">Kategori</h3>
+          <div className="flex flex-col gap-2">
+            {categories.map(cat => (
+              <button
+                key={cat}
+                onClick={() => handleFilterChange(cat)}
+                className={`text-left px-4 py-2.5 rounded-xl text-sm font-medium transition-colors ${
+                  activeFilter === cat 
+                    ? 'bg-primary text-white' 
+                    : 'bg-transparent text-gray-600 hover:bg-gray-50 hover:text-primary'
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredData.map(prog => (
-          <Link key={prog.id} href={`/programs/${prog.id}`} className="bg-white rounded-3xl p-8 hover:-translate-y-1 transition-transform duration-300 border border-black/[0.04] group flex flex-col h-full cursor-pointer block">
-            <div className="flex justify-between items-start mb-12">
-              <span className="text-xs font-semibold tracking-wider uppercase text-gray-400">{prog.category}</span>
-              <ArrowUpRight className="w-5 h-5 text-gray-300 group-hover:text-black transition-colors" />
+      {/* Program Grid */}
+      <div className="w-full lg:w-3/4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+          {paginatedData.map((prog, index) => (
+            <FadeIn key={prog.id} delay={index * 0.1}>
+              <Link href={`/programs/${prog.id}`} className="group relative rounded-3xl overflow-hidden shadow-md hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-2 transition-all duration-500 flex flex-col h-[300px] md:h-[350px]">
+                {/* Background Image */}
+                <Image 
+                  src={prog.image || "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80"}
+                  alt={prog.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+                
+                {/* Primary Color Overlay gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-primary from-15% via-primary/60 via-45% to-transparent to-75% group-hover:from-primary/95 group-hover:via-primary/80 group-hover:to-transparent transition-colors duration-500"></div>
+
+                {/* Content */}
+                <div className="relative z-10 p-5 flex flex-col h-full text-white">
+                  <div className="flex justify-between items-start mb-auto">
+                    <span className="text-[10px] font-bold tracking-widest uppercase bg-white text-primary px-2.5 py-1 rounded-full shadow-sm">
+                      {prog.category}
+                    </span>
+                    <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center group-hover:bg-white transition-colors duration-300 border border-white/30 group-hover:border-transparent">
+                      <ArrowUpRight className="w-4 h-4 text-white group-hover:text-primary transition-colors" />
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-xl font-bold mb-2 drop-shadow-md group-hover:text-white/90 transition-colors duration-300 leading-tight">{prog.title}</h3>
+                    <p className="text-white/90 mb-4 font-light line-clamp-2 text-xs leading-relaxed drop-shadow-sm">{prog.short_description}</p>
+                    
+                    <div className="pt-4 flex items-center justify-between border-t border-white/30">
+                      <span className="text-xs font-semibold text-white bg-white/20 px-3 py-1 rounded-full backdrop-blur-md border border-white/20">
+                        {prog.level}
+                      </span>
+                      <span className="text-xs font-medium text-white/90 flex items-center">
+                        <span className="w-1.5 h-1.5 rounded-full bg-white mr-1.5"></span>
+                        {prog.duration}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            </FadeIn>
+          ))}
+          {filteredData.length === 0 && (
+            <div className="col-span-full py-20 text-center text-gray-500">Tidak ada program untuk kategori ini.</div>
+          )}
+        </div>
+
+        {/* Pagination Controls */}
+        {totalPages > 1 && (
+          <div className="flex justify-center items-center mt-12 gap-2">
+            <button
+              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+              className="p-2 rounded-full border border-gray-200 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              <ChevronLeft className="w-5 h-5 text-gray-600" />
+            </button>
+            
+            <div className="flex gap-1">
+              {Array.from({ length: totalPages }).map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentPage(i + 1)}
+                  className={`w-10 h-10 rounded-full text-sm font-medium transition-colors ${
+                    currentPage === i + 1
+                      ? 'bg-primary text-white'
+                      : 'hover:bg-gray-100 text-gray-600'
+                  }`}
+                >
+                  {i + 1}
+                </button>
+              ))}
             </div>
-            <h3 className="text-2xl font-semibold text-black mb-3 tracking-tight">{prog.title}</h3>
-            <p className="text-gray-500 mb-8 font-light line-clamp-3">{prog.short_description}</p>
-            <div className="mt-auto pt-6 flex items-center justify-between border-t border-black/[0.04]">
-              <span className="text-sm font-medium text-gray-900 bg-gray-100 px-3 py-1 rounded-full">{prog.level}</span>
-              <span className="text-sm font-medium text-gray-400">{prog.duration}</span>
-            </div>
-          </Link>
-        ))}
-        {filteredData.length === 0 && (
-          <div className="col-span-full py-20 text-center text-gray-500">Tidak ada program untuk kategori ini.</div>
+
+            <button
+              onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+              disabled={currentPage === totalPages}
+              className="p-2 rounded-full border border-gray-200 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              <ChevronRight className="w-5 h-5 text-gray-600" />
+            </button>
+          </div>
         )}
       </div>
-    </>
+    </div>
   );
 }
 

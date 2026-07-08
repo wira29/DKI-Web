@@ -75,7 +75,7 @@ export default function LoginPage() {
           <button 
             type="submit" 
             disabled={isLoading}
-            className="w-full bg-black text-white py-3 rounded-xl font-medium hover:bg-gray-800 transition-colors disabled:opacity-70"
+            className="w-full bg-primary text-white py-3 rounded-xl font-medium hover:bg-gray-800 transition-colors disabled:opacity-70"
           >
             {isLoading ? 'Memeriksa...' : 'Masuk Dashboard'}
           </button>

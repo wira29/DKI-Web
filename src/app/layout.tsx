@@ -5,6 +5,7 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { getCmsData } from '@/lib/api';
 import Script from 'next/script';
+import { Toaster } from 'react-hot-toast';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -85,6 +86,7 @@ export default async function RootLayout({
         />
       </head>
       <body className={`${inter.className} antialiased bg-gray-50`}>
+        <Toaster position="top-center" />
         <Navbar categories={categories} />
         <main>{children}</main>
         <Footer />

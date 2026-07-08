@@ -1,16 +1,17 @@
 'use client';
 
+import { ChevronDown, ChevronRight, Menu, X } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
-import { Menu, X, ChevronDown, ChevronRight } from 'lucide-react';
 
 export default function Navbar({ categories = [] }: { categories?: any[] }) {
   const [isScrolledPastHero, setIsScrolledPastHero] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mobileProgramOpen, setMobileProgramOpen] = useState(false);
   const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
+  const [mobileNewsOpen, setMobileNewsOpen] = useState(false);
   
   const pathname = usePathname();
   const isHomePage = pathname === '/';
@@ -40,9 +41,7 @@ export default function Navbar({ categories = [] }: { categories?: any[] }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isHomePage]);
 
-  const navLinkClass = `px-3 py-2 text-sm font-medium transition-colors cursor-pointer flex items-center gap-1 ${
-    isScrolledPastHero ? 'text-gray-500 hover:text-black' : 'text-gray-200 hover:text-white drop-shadow-md'
-  }`;
+  const navLinkClass = `px-3 py-2 text-sm font-medium transition-colors cursor-pointer flex items-center gap-1 text-gray-500 hover:text-black`;
 
   const dropdownClass = "absolute left-0 mt-2 bg-white border border-gray-100 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 rounded-xl flex flex-col z-50 overflow-visible";
 
@@ -52,35 +51,28 @@ export default function Navbar({ categories = [] }: { categories?: any[] }) {
   const pkCats = categories.filter(c => c.type === 'PELATIHAN_KERJA');
 
   return (
-    <nav 
-      className={`fixed w-full z-50 top-0 left-0 transition-all duration-500 ${
-        isScrolledPastHero 
-          ? 'bg-white/90 backdrop-blur-md border-b border-black/5 shadow-sm py-0' 
-          : 'bg-transparent border-transparent py-2'
-      }`}
-    >
+    <nav className="fixed w-full z-50 top-0 left-0 bg-white/90 backdrop-blur-md border-b border-black/5 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0 flex items-center">
             <Link 
               href="/" 
-              className={`flex items-center gap-3 text-2xl font-bold transition-colors ${
-                isScrolledPastHero ? 'text-black' : 'text-white drop-shadow-md'
-              }`}
+              className="flex items-center gap-2 md:gap-3 text-sm sm:text-base md:text-xl font-bold text-black"
             >
-              <Image src="/logo.webp" alt="Logo DKI" width={36} height={36} className="h-9 w-auto rounded-sm object-contain bg-transparent" priority />
-              <span>DKI</span>
+              <Image src="/logo.webp" alt="Logo DKI" width={36} height={36} className="h-8 md:h-9 w-auto rounded-sm object-contain bg-transparent" priority />
+              <span className="tracking-tight whitespace-nowrap text-[#132842]"><span className='text-primary'>Digital</span> Kompetensi Indonesia</span>
             </Link>
           </div>
           
-          <div className="hidden md:flex space-x-6 items-center">
+          <div className="hidden md:flex items-center gap-4 ml-auto">
+            <div className="flex space-x-1 lg:space-x-2 items-center">
             {/* Beranda */}
             <Link href="/" className={navLinkClass}>Beranda</Link>
             
-            {/* Tentang Kami */}
+            {/* Tentang */}
             <div className="relative group">
               <div className={navLinkClass}>
-                Tentang Kami <ChevronDown className="w-4 h-4" />
+                Tentang <ChevronDown className="w-4 h-4" />
               </div>
               <div className={`${dropdownClass} w-48`}>
                 <Link href="/about/profil" className={dropdownItemClass}>Profil & Visi Misi</Link>
@@ -89,10 +81,10 @@ export default function Navbar({ categories = [] }: { categories?: any[] }) {
               </div>
             </div>
 
-            {/* Program & Layanan */}
+            {/* Program */}
             <div className="relative group">
               <div className={navLinkClass}>
-                Program & Layanan <ChevronDown className="w-4 h-4" />
+                Program <ChevronDown className="w-4 h-4" />
               </div>
               <div className={`${dropdownClass} w-56 p-2`}>
                 
@@ -131,28 +123,34 @@ export default function Navbar({ categories = [] }: { categories?: any[] }) {
               </div>
             </div>
 
-            {/* Artikel & Acara */}
-            <Link href="/events" className={navLinkClass}>Artikel & Acara</Link>
-          </div>
+            {/* Berita & Artikel */}
+            <div className="relative group">
+              <div className={navLinkClass}>
+                Berita & Artikel <ChevronDown className="w-4 h-4" />
+              </div>
+              <div className={`${dropdownClass} w-40`}>
+                <Link href="/news" className={dropdownItemClass}>Berita</Link>
+                <Link href="/articles" className={dropdownItemClass}>Artikel</Link>
+              </div>
+            </div>
 
-          <div className="hidden md:flex items-center">
+            {/* Hubungi */}
+            <Link href="/contact" className={navLinkClass}>Hubungi</Link>
+            </div>
+{/* 
             <Link 
               href="/#programs"
-              className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all ${
-                isScrolledPastHero 
-                  ? 'bg-black hover:bg-gray-800 text-white shadow-sm' 
-                  : 'bg-white/20 hover:bg-white/30 text-white backdrop-blur-sm border border-white/30'
-              }`}
+              className="px-6 py-2.5 rounded-full text-sm font-medium transition-all bg-primary hover:bg-primary-hover text-white shadow-sm"
             >
               Daftar Sekarang
-            </Link>
+            </Link> */}
           </div>
           
-          <div className="flex md:hidden items-center">
+          <div className="flex md:hidden items-center ml-auto">
             <button 
               aria-label="Buka menu navigasi"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
-              className={`p-2 rounded-md ${isScrolledPastHero ? 'text-black' : 'text-white'}`}
+              className="p-2 rounded-md text-black"
             >
               {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -168,7 +166,7 @@ export default function Navbar({ categories = [] }: { categories?: any[] }) {
           
           <div className="border-b border-gray-50 py-3">
             <button onClick={() => setMobileAboutOpen(!mobileAboutOpen)} className="w-full flex justify-between items-center text-gray-700 font-medium text-lg">
-              Tentang Kami <ChevronDown className={`w-5 h-5 transition-transform ${mobileAboutOpen ? 'rotate-180' : ''}`} />
+              Tentang <ChevronDown className={`w-5 h-5 transition-transform ${mobileAboutOpen ? 'rotate-180' : ''}`} />
             </button>
             {mobileAboutOpen && (
               <div className="flex flex-col gap-3 mt-4 pl-4 border-l-2 border-gray-100">
@@ -181,7 +179,7 @@ export default function Navbar({ categories = [] }: { categories?: any[] }) {
 
           <div className="border-b border-gray-50 py-3">
             <button onClick={() => setMobileProgramOpen(!mobileProgramOpen)} className="w-full flex justify-between items-center text-gray-700 font-medium text-lg">
-              Program & Layanan <ChevronDown className={`w-5 h-5 transition-transform ${mobileProgramOpen ? 'rotate-180' : ''}`} />
+              Program <ChevronDown className={`w-5 h-5 transition-transform ${mobileProgramOpen ? 'rotate-180' : ''}`} />
             </button>
             {mobileProgramOpen && (
               <div className="flex flex-col gap-4 mt-4 pl-4 border-l-2 border-gray-100">
@@ -213,11 +211,24 @@ export default function Navbar({ categories = [] }: { categories?: any[] }) {
             )}
           </div>
 
-          <Link href="/events" onClick={() => setIsMobileMenuOpen(false)} className="text-gray-700 hover:text-black font-medium text-lg py-3 border-b border-gray-50">Artikel & Acara</Link>
+          <div className="border-b border-gray-50 py-3">
+            <button onClick={() => setMobileNewsOpen(!mobileNewsOpen)} className="w-full flex justify-between items-center text-gray-700 font-medium text-lg">
+              Berita & Artikel <ChevronDown className={`w-5 h-5 transition-transform ${mobileNewsOpen ? 'rotate-180' : ''}`} />
+            </button>
+            {mobileNewsOpen && (
+              <div className="flex flex-col gap-3 mt-4 pl-4 border-l-2 border-gray-100">
+                <Link href="/news" onClick={() => setIsMobileMenuOpen(false)} className="text-gray-500 hover:text-black">Berita</Link>
+                <Link href="/articles" onClick={() => setIsMobileMenuOpen(false)} className="text-gray-500 hover:text-black">Artikel</Link>
+              </div>
+            )}
+          </div>
+
+          <Link href="/events" onClick={() => setIsMobileMenuOpen(false)} className="text-gray-700 hover:text-black font-medium text-lg py-3 border-b border-gray-50">Acara</Link>
+          <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="text-gray-700 hover:text-black font-medium text-lg py-3 border-b border-gray-50">Hubungi</Link>
           
           <Link 
             href="/#programs"
-            className="w-full mt-6 bg-black text-white py-3 rounded-full font-medium text-center inline-block"
+            className="w-full mt-6 bg-primary hover:bg-primary-hover transition-colors text-white py-3 rounded-full font-medium text-center inline-block"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             Daftar Sekarang

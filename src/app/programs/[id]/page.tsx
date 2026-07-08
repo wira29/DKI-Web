@@ -1,6 +1,24 @@
 import { prisma } from '@/lib/db';
 import Link from 'next/link';
 import { ArrowLeft, CheckCircle2 } from 'lucide-react';
+import { Metadata } from 'next';
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params;
+  const prog = await prisma.program.findUnique({ where: { id } });
+  
+  if (!prog) return { title: 'Program Tidak Ditemukan' };
+
+  return {
+    title: prog.title,
+    description: prog.short_description,
+    openGraph: {
+      title: prog.title,
+      description: prog.short_description,
+      images: [prog.image],
+    }
+  };
+}
 
 export default async function ProgramDetail({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;

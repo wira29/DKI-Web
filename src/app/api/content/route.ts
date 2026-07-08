@@ -18,6 +18,7 @@ export async function PUT(request: Request) {
     }
     return NextResponse.json({ message: 'Data saved successfully' });
   } catch (error) {
+    console.error('Error parsing JSON or other error in PUT /api/content:', error);
     return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
   }
 }
