@@ -11,7 +11,7 @@ export default function Hero({ frames = [], features = [] }: { frames?: any[], f
   };
 
   return (
-    <section className="relative h-[100vh] bg-primary pt-26 pb-8 overflow-hidden font-sans">
+    <section className="relative min-h-[100vh] flex flex-col justify-center bg-primary pt-26 pb-8 overflow-hidden font-sans">
       {/* Subtle Grid Background Pattern */}
       <div 
         className="absolute inset-0 opacity-[0.04] pointer-events-none" 
