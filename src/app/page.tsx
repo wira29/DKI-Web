@@ -10,7 +10,7 @@ import { Metadata } from 'next';
 import { prisma } from '@/lib/db';
 
 export const metadata: Metadata = {
-  title: 'Beranda | Digital Kompetensi Indonesia',
+  title: 'Digital Kompetensi Indonesia: Lembaga Kursus dan Pelatihan Kerja Digital',
   description: 'Selamat datang di Digital Kompetensi Indonesia, lembaga kursus dan pelatihan IT terbaik dengan sertifikasi resmi.',
 };
 
