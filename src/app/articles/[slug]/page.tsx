@@ -3,9 +3,9 @@ import { ArrowLeft, Calendar, FileText } from 'lucide-react';
 import Link from 'next/link';
 import { Metadata } from 'next';
 
-export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
-  const { id } = await params;
-  const articleItem = await prisma.post.findUnique({ where: { id } });
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const articleItem = await prisma.post.findUnique({ where: { slug } });
   
   if (!articleItem) return { title: 'Artikel Tidak Ditemukan' };
 
@@ -20,10 +20,10 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   };
 }
 
-export default async function ArticleDetail({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
+export default async function ArticleDetail({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   
-  const articleItem = await prisma.post.findUnique({ where: { id } });
+  const articleItem = await prisma.post.findUnique({ where: { slug } });
 
   if (!articleItem) {
     return (

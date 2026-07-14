@@ -22,7 +22,7 @@ export default function Certifications({ data: certificationsData = [] }: { data
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
           {certificationsData.map((cert, index) => (
             <FadeIn key={cert.id} delay={index * 0.1}>
-              <Link href={`/certifications/${cert.id}`} className="group relative bg-white p-5 md:p-6 rounded-3xl shadow-sm border border-gray-100 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 hover:-translate-y-1.5 overflow-hidden flex flex-col h-[300px]">
+              <Link href={`/certifications/${cert.slug}`} className="group relative bg-white p-5 md:p-6 rounded-3xl shadow-sm border border-gray-100 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 hover:-translate-y-1.5 overflow-hidden flex flex-col h-[300px]">
                 
                 {/* Ornamen Background Glow */}
                 <div className="absolute top-0 right-0 -mt-6 -mr-6 w-32 h-32 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/20 transition-all duration-500"></div>

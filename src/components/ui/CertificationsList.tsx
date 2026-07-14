@@ -47,7 +47,7 @@ export default function CertificationsList({ certificationsData }: { certificati
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
           {paginatedData.map((cert, index) => (
             <FadeIn key={cert.id} delay={index * 0.1}>
-              <Link href={`/certifications/${cert.id}`} className="group relative rounded-3xl overflow-hidden shadow-md hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-2 transition-all duration-500 flex flex-col h-[300px] md:h-[350px]">
+              <Link href={`/certifications/${cert.slug}`} className="group relative rounded-3xl overflow-hidden shadow-md hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-2 transition-all duration-500 flex flex-col h-[300px] md:h-[350px]">
                 {/* Background Image */}
                 <Image 
                   src={cert.image || "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&q=80"}

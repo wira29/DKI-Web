@@ -3,9 +3,9 @@ import Link from 'next/link';
 import { ArrowLeft, CheckCircle2 } from 'lucide-react';
 import { Metadata } from 'next';
 
-export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
-  const { id } = await params;
-  const cert = await prisma.certification.findUnique({ where: { id } });
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const cert = await prisma.certification.findUnique({ where: { slug } });
   
   if (!cert) return { title: 'Sertifikasi Tidak Ditemukan' };
 
@@ -20,9 +20,9 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   };
 }
 
-export default async function CertificationDetail({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
-  const cert = await prisma.certification.findUnique({ where: { id } });
+export default async function CertificationDetail({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const cert = await prisma.certification.findUnique({ where: { slug } });
   const footerData = await prisma.footerData.findFirst();
 
   if (!cert) {

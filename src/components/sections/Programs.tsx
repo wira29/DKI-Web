@@ -22,7 +22,7 @@ export default function Programs({ data: programsData = [] }: { data?: any[] }) 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
           {programsData.slice(0, 4).map((prog, index) => (
             <FadeIn key={prog.id} delay={index * 0.1}>
-              <Link href={`/programs/${prog.id}`} className="group relative rounded-3xl overflow-hidden shadow-md hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-2 transition-all duration-500 flex flex-col h-[300px] md:h-[350px]">
+              <Link href={`/programs/${prog.slug}`} className="group relative rounded-3xl overflow-hidden shadow-md hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-2 transition-all duration-500 flex flex-col h-[300px] md:h-[350px]">
                 {/* Background Image */}
                 <Image 
                   src={prog.image || "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80"}

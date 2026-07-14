@@ -60,7 +60,7 @@ export default function Events({ data: postsData = [] }: { data?: any[] }) {
               {postsData.map(post => (
                 <Link 
                   key={post.id} 
-                  href={post.type === 'ARTIKEL' ? `/articles/${post.id}` : `/news/${post.id}`} 
+                  href={post.type === 'ARTIKEL' ? `/articles/${post.slug}` : `/news/${post.slug}`} 
                   className="group relative w-[85vw] sm:w-[calc(50%-12px)] lg:w-[calc(25%-18px)] flex-shrink-0 snap-start bg-white rounded-3xl shadow-sm border border-gray-100 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 hover:-translate-y-1.5 flex flex-col h-full overflow-hidden"
                 >
                   <div className="relative overflow-hidden aspect-[4/3] bg-gray-100">

@@ -33,6 +33,7 @@ async function main() {
   const programs = [
     {
       id: 'prog-1',
+      slug: 'fullstack-web-developer',
       title: 'Fullstack Web Developer',
       short_description: 'Belajar membuat website dari nol hingga mahir menggunakan MERN stack.',
       image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80',
@@ -46,6 +47,7 @@ async function main() {
     },
     {
       id: 'prog-2',
+      slug: 'data-science-with-python',
       title: 'Data Science with Python',
       short_description: 'Kuasai analisis data, machine learning, dan visualisasi dengan Python.',
       image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80',
@@ -59,6 +61,7 @@ async function main() {
     },
     {
       id: 'prog-3',
+      slug: 'digital-marketing-bootcamp',
       title: 'Digital Marketing Bootcamp',
       short_description: 'Pelajari SEO, SEM, dan Social Media Ads untuk tingkatkan karirmu.',
       image: 'https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&q=80',
@@ -79,6 +82,7 @@ async function main() {
   const certifications = [
     {
       id: 'cert-1',
+      slug: 'sertifikasi-bnsp-junior-web-developer',
       title: 'Sertifikasi BNSP Junior Web Developer',
       short_description: 'Dapatkan pengakuan negara atas kompetensi web development-mu.',
       image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80',
@@ -87,6 +91,7 @@ async function main() {
     },
     {
       id: 'cert-2',
+      slug: 'sertifikasi-bnsp-digital-marketing',
       title: 'Sertifikasi BNSP Digital Marketing',
       short_description: 'Validasi kemampuan digital marketing dengan standar industri.',
       image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80',
@@ -129,6 +134,7 @@ async function main() {
   const posts = [
     {
       id: 'post-1',
+      slug: 'peluang-karir-it-di-tahun-2026',
       title: 'Peluang Karir IT di Tahun 2026',
       short_description: 'Membahas tentang trend teknologi terbaru dan posisi apa saja yang sedang naik daun.',
       image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80',
@@ -137,6 +143,7 @@ async function main() {
     },
     {
       id: 'post-2',
+      slug: 'seminar-nasional-ai-untuk-pendidikan',
       title: 'Seminar Nasional AI untuk Pendidikan',
       short_description: 'Kami baru saja mengadakan seminar nasional yang dihadiri oleh ratusan peserta.',
       image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80',

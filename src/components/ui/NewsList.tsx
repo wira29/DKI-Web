@@ -29,7 +29,7 @@ export default function NewsList({
     <>
       <div className="flex flex-col gap-8">
         {paginatedData.map(item => (
-          <Link key={item.id} href={`${baseUrl}/${item.id}`} className="group cursor-pointer block border-b border-gray-100 pb-8 last:border-0 last:pb-0">
+          <Link key={item.id} href={`${baseUrl}/${item.slug}`} className="group cursor-pointer block border-b border-gray-100 pb-8 last:border-0 last:pb-0">
             <div className="flex flex-col md:flex-row gap-8 items-start">
               <div className="w-full md:w-1/3 aspect-[4/3] md:aspect-video bg-gray-100 rounded-2xl overflow-hidden shrink-0 relative">
                 <img 

@@ -15,6 +15,7 @@ model Category {
 
 model Program {
   id                String  @id
+  slug              String  @unique
   title             String
   short_description String  @db.LongText
   image             String  @db.LongText
@@ -29,6 +30,7 @@ model Program {
 
 model Certification {
   id                String @id
+  slug              String @unique
   title             String
   short_description String @db.LongText
   image             String @db.LongText
@@ -49,6 +51,7 @@ model Testimonial {
 
 model Post {
   id                String   @id
+  slug              String   @unique
   title             String
   short_description String   @db.LongText
   image             String   @db.LongText

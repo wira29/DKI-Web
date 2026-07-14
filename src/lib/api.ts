@@ -57,6 +57,7 @@ export async function saveCmsData(data: any) {
         await prisma.program.create({
           data: {
             id: prog.id,
+            slug: prog.slug || prog.id,
             title: prog.title,
             short_description: prog.short_description,
             image: prog.image,
@@ -79,6 +80,7 @@ export async function saveCmsData(data: any) {
         await prisma.certification.create({
           data: {
             id: cert.id,
+            slug: cert.slug || cert.id,
             title: cert.title,
             short_description: cert.short_description,
             image: cert.image,
@@ -122,6 +124,7 @@ export async function saveCmsData(data: any) {
         await prisma.post.create({
           data: {
             id: post.id,
+            slug: post.slug || post.id,
             title: post.title,
             short_description: post.short_description,
             image: post.image,
