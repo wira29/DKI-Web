@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
-import sharp from 'sharp';
 
 export async function GET() {
   const publicDir = path.join(process.cwd(), 'public');
@@ -36,7 +35,8 @@ export async function POST(request: Request) {
     const filename = `${Date.now()}-${baseName}.webp`;
     const filePath = path.join(publicDir, filename);
 
-    // Process image with sharp
+    // Process image with sharp (imported dynamically to avoid Turbopack static-phase build errors)
+    const sharp = (await import('sharp')).default;
     let sharpInstance = sharp(buffer);
     const metadata = await sharpInstance.metadata();
 
