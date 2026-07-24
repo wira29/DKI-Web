@@ -86,29 +86,41 @@ export default async function ProgramDetail({ params }: { params: Promise<{ slug
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
           <div className="lg:col-span-2 space-y-16">
-            <section>
-              <h2 className="text-3xl font-semibold text-black mb-6">Tentang Program Ini</h2>
-              <div className="text-lg text-gray-500 leading-relaxed font-light space-y-6">
-                <p>
-                  Program intensif {prog.duration} ini dirancang secara khusus untuk membekali Anda dengan keterampilan praktis dan teoritis yang dibutuhkan industri teknologi saat ini. Dengan kurikulum yang berfokus pada studi kasus nyata, Anda tidak hanya belajar konsep, tetapi juga membangun portfolio yang solid.
-                </p>
-                <p>
-                  Anda akan dibimbing langsung oleh mentor expert yang aktif bekerja di industri. Di akhir kelas, Anda akan mempresentasikan studi kasus akhir yang bisa langsung Anda pamerkan kepada calon perekrut.
-                </p>
-              </div>
-            </section>
+            {prog.description ? (
+              <section>
+                <h2 className="text-3xl font-semibold text-black mb-6">Tentang Program Ini</h2>
+                <div 
+                  className="text-lg text-gray-500 leading-relaxed font-light w-full break-words overflow-hidden [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-2 [&_ul]:my-4 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:space-y-2 [&_ol]:my-4 [&_p]:mb-4 [&_strong]:font-semibold [&_strong]:text-black [&_b]:font-semibold [&_b]:text-black [&_h1]:text-3xl [&_h1]:font-semibold [&_h1]:text-black [&_h1]:mt-8 [&_h1]:mb-4 [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:text-black [&_h2]:mt-8 [&_h2]:mb-4 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-black [&_h3]:mt-6 [&_h3]:mb-3 [&_h4]:text-lg [&_h4]:font-semibold [&_h4]:text-black [&_h4]:mt-4 [&_h4]:mb-2 [&_img]:max-w-full [&_img]:h-auto [&_pre]:max-w-full [&_pre]:overflow-x-auto"
+                  dangerouslySetInnerHTML={{ __html: prog.description }}
+                />
+              </section>
+            ) : (
+              <>
+                <section>
+                  <h2 className="text-3xl font-semibold text-black mb-6">Tentang Program Ini</h2>
+                  <div className="text-lg text-gray-500 leading-relaxed font-light space-y-6">
+                    <p>
+                      Program intensif {prog.duration} ini dirancang secara khusus untuk membekali Anda dengan keterampilan praktis dan teoritis yang dibutuhkan industri teknologi saat ini. Dengan kurikulum yang berfokus pada studi kasus nyata, Anda tidak hanya belajar konsep, tetapi juga membangun portfolio yang solid.
+                    </p>
+                    <p>
+                      Anda akan dibimbing langsung oleh mentor expert yang aktif bekerja di industri. Di akhir kelas, Anda akan mempresentasikan studi kasus akhir yang bisa langsung Anda pamerkan kepada calon perekrut.
+                    </p>
+                  </div>
+                </section>
 
-            <section>
-              <h2 className="text-3xl font-semibold text-black mb-6">Yang Akan Anda Dapatkan</h2>
-              <ul className="space-y-4">
-                {['Akses materi seumur hidup', 'Sesi mentoring eksklusif', 'Sertifikat kelulusan digital', 'Bantuan penyaluran kerja (Hiring Partners)'].map((benefit, i) => (
-                  <li key={i} className="flex items-start text-lg text-gray-500 font-light">
-                    <CheckCircle2 className="w-6 h-6 text-black mr-4 flex-shrink-0 mt-0.5" />
-                    {benefit}
-                  </li>
-                ))}
-              </ul>
-            </section>
+                <section>
+                  <h2 className="text-3xl font-semibold text-black mb-6">Yang Akan Anda Dapatkan</h2>
+                  <ul className="space-y-4">
+                    {['Akses materi seumur hidup', 'Sesi mentoring eksklusif', 'Sertifikat kelulusan digital', 'Bantuan penyaluran kerja (Hiring Partners)'].map((benefit, i) => (
+                      <li key={i} className="flex items-start text-lg text-gray-500 font-light">
+                        <CheckCircle2 className="w-6 h-6 text-black mr-4 flex-shrink-0 mt-0.5" />
+                        {benefit}
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              </>
+            )}
           </div>
 
           <div>

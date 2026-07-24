@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
+import sharp from 'sharp';
 
 export async function GET() {
   const publicDir = path.join(process.cwd(), 'public');
@@ -29,12 +30,33 @@ export async function POST(request: Request) {
     const buffer = Buffer.from(await file.arrayBuffer());
     const publicDir = path.join(process.cwd(), 'public');
     
-    // Sanitize filename
-    const safeName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
-    const filename = `${Date.now()}-${safeName}`;
+    // Extract base filename without extension and append .webp extension
+    const ext = path.extname(file.name);
+    const baseName = path.basename(file.name, ext).replace(/[^a-zA-Z0-9.-]/g, '_');
+    const filename = `${Date.now()}-${baseName}.webp`;
     const filePath = path.join(publicDir, filename);
 
-    fs.writeFileSync(filePath, buffer);
+    // Process image with sharp
+    let sharpInstance = sharp(buffer);
+    const metadata = await sharpInstance.metadata();
+
+    // Auto-resize if dimensions are excessively large (helps guarantee < 500KB)
+    if (metadata.width && metadata.width > 1920) {
+      sharpInstance = sharpInstance.resize({ width: 1920 });
+    } else if (metadata.height && metadata.height > 1080) {
+      sharpInstance = sharpInstance.resize({ height: 1080 });
+    }
+
+    let quality = 82;
+    let webpBuffer = await sharpInstance.clone().webp({ quality }).toBuffer();
+
+    // Loop compression if size is still greater than 500KB (512,000 bytes)
+    while (webpBuffer.length > 500 * 1024 && quality > 10) {
+      quality -= 10;
+      webpBuffer = await sharpInstance.clone().webp({ quality }).toBuffer();
+    }
+
+    fs.writeFileSync(filePath, webpBuffer);
     return NextResponse.json({ url: `/api/file/${filename}` });
   } catch (error) {
     console.error('Upload error:', error);

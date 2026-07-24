@@ -43,7 +43,8 @@ async function main() {
       badge: 'Terpopuler',
       category: 'Web Development',
       level: 'Beginner to Advanced',
-      type: 'KURSUS'
+      type: 'KURSUS',
+      description: '<p>Program intensif 3 Bulan ini dirancang secara khusus untuk membekali Anda dengan keterampilan praktis dan teoritis yang dibutuhkan industri teknologi saat ini. Dengan kurikulum yang berfokus pada studi kasus nyata, Anda tidak hanya belajar konsep, tetapi juga membangun portfolio yang solid.</p><p>Anda akan dibimbing langsung oleh mentor expert yang aktif bekerja di industri. Di akhir kelas, Anda akan mempresentasikan studi kasus akhir yang bisa langsung Anda pamerkan kepada calon perekrut.</p><h2>Yang Akan Anda Dapatkan</h2><ul><li>Akses materi seumur hidup</li><li>Sesi mentoring eksklusif</li><li>Sertifikat kelulusan digital</li><li>Bantuan penyaluran kerja (Hiring Partners)</li></ul>'
     },
     {
       id: 'prog-2',
@@ -57,7 +58,8 @@ async function main() {
       badge: 'Banyak Dicari',
       category: 'Data Science',
       level: 'Intermediate',
-      type: 'KURSUS'
+      type: 'KURSUS',
+      description: '<p>Program intensif 4 Bulan ini dirancang untuk membimbing Anda menguasai data science, statistik, machine learning, dan pemrograman Python dari dasar hingga siap kerja. Melalui proyek dunia nyata, Anda akan terlatih menyelesaikan masalah berbasis data.</p><p>Metode belajar mencakup teori langsung praktek, live class, dan bimbingan karir intensif.</p><h2>Yang Akan Anda Dapatkan</h2><ul><li>Akses materi seumur hidup</li><li>Sesi mentoring eksklusif</li><li>Sertifikat kelulusan digital</li><li>Bantuan penyaluran kerja (Hiring Partners)</li></ul>'
     },
     {
       id: 'prog-3',
@@ -71,7 +73,8 @@ async function main() {
       badge: '',
       category: 'Digital Marketing',
       level: 'Beginner',
-      type: 'PELATIHAN_KERJA'
+      type: 'PELATIHAN_KERJA',
+      description: '<p>Program intensif 2 Bulan yang membekali Anda dengan pemahaman mendalam tentang SEO, SEM, Social Media Marketing, Analytics, dan strategi iklan digital (Facebook/Google Ads) untuk mendongkrak penjualan bisnis atau meniti karir sebagai Digital Marketer profesional.</p><h2>Yang Akan Anda Dapatkan</h2><ul><li>Akses materi seumur hidup</li><li>Sesi mentoring eksklusif</li><li>Sertifikat kelulusan digital</li><li>Bantuan penyaluran kerja (Hiring Partners)</li></ul>'
     }
   ];
   for (const prog of programs) {
@@ -87,7 +90,8 @@ async function main() {
       short_description: 'Dapatkan pengakuan negara atas kompetensi web development-mu.',
       image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80',
       issuing_body: 'BNSP RI',
-      price: 500000
+      price: 500000,
+      description: '<p>Sertifikasi Junior Web Developer adalah pengakuan formal atas kompetensi Anda sesuai dengan standar yang ditetapkan oleh BNSP RI. Memiliki sertifikasi ini akan secara drastis meningkatkan portofolio dan nilai jual Anda di mata perekrut industri teknologi.</p><p>Ujian akan terdiri dari tes teori dan tes praktek. Peserta diharapkan sudah memiliki pemahaman fundamental yang memadai sebelum mengikuti jadwal ujian ini.</p><h2>Persyaratan Peserta</h2><ul><li>Membawa laptop pribadi dengan spesifikasi minimal core i3</li><li>Memiliki portfolio proyek relevan dengan web development</li><li>Lulus tes prasyarat administrasi dan mengisi formulir APL-01</li></ul>'
     },
     {
       id: 'cert-2',
@@ -96,7 +100,8 @@ async function main() {
       short_description: 'Validasi kemampuan digital marketing dengan standar industri.',
       image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80',
       issuing_body: 'BNSP RI',
-      price: 450000
+      price: 450000,
+      description: '<p>Sertifikasi Digital Marketing adalah pengakuan resmi dari BNSP RI untuk memvalidasi keahlian Anda di bidang strategi pemasaran digital, SEO, media sosial, dan periklanan. Cocok untuk praktisi pemasaran dan wirausaha.</p><p>Ujian sertifikasi dilakukan secara luring/daring oleh asesor berlisensi resmi.</p><h2>Persyaratan Peserta</h2><ul><li>Memiliki sertifikat pelatihan digital marketing atau bukti portofolio kerja minimal 1 tahun</li><li>Membawa laptop pribadi</li><li>Menyiapkan materi kampanye iklan digital</li></ul>'
     }
   ];
   for (const cert of certifications) {

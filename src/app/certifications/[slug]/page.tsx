@@ -81,26 +81,21 @@ export default async function CertificationDetail({ params }: { params: Promise<
           <div className="lg:col-span-2 space-y-16">
             <section>
               <h2 className="text-3xl font-semibold text-black mb-6">Tentang Sertifikasi</h2>
-              <div className="text-lg text-gray-500 leading-relaxed font-light space-y-6">
-                <p>
-                  Sertifikasi {cert.title} adalah pengakuan formal atas kompetensi Anda sesuai dengan standar yang ditetapkan oleh {cert.issuing_body}. Memiliki sertifikasi ini akan secara drastis meningkatkan portofolio dan nilai jual Anda di mata perekrut industri teknologi.
-                </p>
-                <p>
-                  Ujian akan terdiri dari tes teori dan tes praktek. Peserta diharapkan sudah memiliki pemahaman fundamental yang memadai sebelum mengikuti jadwal ujian ini.
-                </p>
-              </div>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-semibold text-black mb-6">Persyaratan Peserta</h2>
-              <ul className="space-y-4">
-                {['Membawa laptop pribadi', 'Memiliki portfolio proyek relevan', 'Lulus tes prasyarat administrasi'].map((req, i) => (
-                  <li key={i} className="flex items-start text-gray-500 font-light">
-                    <CheckCircle2 className="w-5 h-5 text-gray-300 mr-3 flex-shrink-0 mt-0.5" />
-                    {req}
-                  </li>
-                ))}
-              </ul>
+              {cert.description ? (
+                <div 
+                  className="text-lg text-gray-500 leading-relaxed font-light w-full break-words overflow-hidden [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-2 [&_ul]:my-4 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:space-y-2 [&_ol]:my-4 [&_p]:mb-4 [&_strong]:font-semibold [&_strong]:text-black [&_b]:font-semibold [&_b]:text-black [&_h1]:text-3xl [&_h1]:font-semibold [&_h1]:text-black [&_h1]:mt-8 [&_h1]:mb-4 [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:text-black [&_h2]:mt-8 [&_h2]:mb-4 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-black [&_h3]:mt-6 [&_h3]:mb-3 [&_h4]:text-lg [&_h4]:font-semibold [&_h4]:text-black [&_h4]:mt-4 [&_h4]:mb-2 [&_img]:max-w-full [&_img]:h-auto [&_pre]:max-w-full [&_pre]:overflow-x-auto"
+                  dangerouslySetInnerHTML={{ __html: cert.description }}
+                />
+              ) : (
+                <div className="text-lg text-gray-500 leading-relaxed font-light space-y-6">
+                  <p>
+                    Sertifikasi {cert.title} adalah pengakuan formal atas kompetensi Anda sesuai dengan standar yang ditetapkan oleh {cert.issuing_body}. Memiliki sertifikasi ini akan secara drastis meningkatkan portofolio dan nilai jual Anda di mata perekrut industri teknologi.
+                  </p>
+                  <p>
+                    Ujian akan terdiri dari tes teori dan tes praktek. Peserta diharapkan sudah memiliki pemahaman fundamental yang memadai sebelum mengikuti jadwal ujian ini.
+                  </p>
+                </div>
+              )}
             </section>
           </div>
 

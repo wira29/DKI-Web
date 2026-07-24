@@ -31,12 +31,16 @@ export default function CmsProgramDetail({ params }: { params: Promise<{ id: str
             badge: '',
             category: json.categoriesData?.[0]?.name || 'Uncategorized',
             level: 'Beginner',
-            type: 'KURSUS'
+            type: 'KURSUS',
+            description: ''
           });
         } else {
           const found = json.programsData.find((p: any) => p.id === id);
           if (found) {
-            setProg({ ...found });
+            setProg({
+              ...found,
+              description: found.description || ''
+            });
           }
         }
       })
@@ -116,10 +120,20 @@ export default function CmsProgramDetail({ params }: { params: Promise<{ id: str
           </div>
 
           <div className="md:col-span-2">
-            <label className="block text-sm font-medium text-gray-700 mb-2">Deskripsi (WYSIWYG)</label>
-            <WysiwygEditor 
+            <label className="block text-sm font-medium text-gray-700 mb-1">Subtitle / Penjelasan Singkat</label>
+            <input 
+              type="text" 
               value={prog.short_description} 
-              onChange={(val) => setProg({...prog, short_description: val})} 
+              onChange={e => setProg({...prog, short_description: e.target.value})}
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-black outline-none transition-all text-sm text-black"
+            />
+          </div>
+
+          <div className="md:col-span-2">
+            <label className="block text-sm font-medium text-gray-700 mb-2">Detail Program (WYSIWYG)</label>
+            <WysiwygEditor 
+              value={prog.description} 
+              onChange={(val) => setProg({...prog, description: val})} 
             />
           </div>
 

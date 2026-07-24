@@ -67,7 +67,8 @@ export async function saveCmsData(data: any) {
             badge: prog.badge,
             category: prog.category,
             level: prog.level,
-            type: prog.type || 'KURSUS'
+            type: prog.type || 'KURSUS',
+            description: prog.description || null
           } as any
         });
       }
@@ -85,7 +86,8 @@ export async function saveCmsData(data: any) {
             short_description: cert.short_description,
             image: cert.image,
             issuing_body: cert.issuing_body,
-            price: cert.price
+            price: cert.price,
+            description: cert.description || null
           }
         });
       }
@@ -218,6 +220,6 @@ export async function saveCmsData(data: any) {
     return true;
   } catch (error) {
     console.error('Failed to write to Database', error);
-    return false;
+    throw error;
   }
 }

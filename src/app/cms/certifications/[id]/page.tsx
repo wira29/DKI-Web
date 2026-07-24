@@ -26,12 +26,16 @@ export default function CmsCertificationDetail({ params }: { params: Promise<{ i
             short_description: '',
             image: '',
             issuing_body: '',
-            price: 0
+            price: 0,
+            description: ''
           });
         } else {
           const found = json.certificationsData.find((p: any) => p.id === id);
           if (found) {
-            setCert({ ...found });
+            setCert({
+              ...found,
+              description: found.description || ''
+            });
           }
         }
       })
@@ -111,10 +115,20 @@ export default function CmsCertificationDetail({ params }: { params: Promise<{ i
           </div>
 
           <div className="md:col-span-2">
-            <label className="block text-sm font-medium text-gray-700 mb-2">Deskripsi (WYSIWYG)</label>
-            <WysiwygEditor 
+            <label className="block text-sm font-medium text-gray-700 mb-1">Subtitle / Deskripsi Singkat</label>
+            <input 
+              type="text" 
               value={cert.short_description} 
-              onChange={(val) => setCert({...cert, short_description: val})} 
+              onChange={e => setCert({...cert, short_description: e.target.value})}
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-black outline-none transition-all text-sm text-black"
+            />
+          </div>
+
+          <div className="md:col-span-2">
+            <label className="block text-sm font-medium text-gray-700 mb-2">Penjelasan Sertifikasi (WYSIWYG)</label>
+            <WysiwygEditor 
+              value={cert.description} 
+              onChange={(val) => setCert({...cert, description: val})} 
             />
           </div>
 

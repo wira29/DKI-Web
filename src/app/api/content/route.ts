@@ -12,13 +12,13 @@ export async function GET() {
 export async function PUT(request: Request) {
   try {
     const newData = await request.json();
-    const success = await saveCmsData(newData);
-    if (!success) {
-      return NextResponse.json({ error: 'Failed to save data' }, { status: 500 });
-    }
+    await saveCmsData(newData);
     return NextResponse.json({ message: 'Data saved successfully' });
-  } catch (error) {
-    console.error('Error parsing JSON or other error in PUT /api/content:', error);
-    return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
+  } catch (error: any) {
+    console.error('Error in PUT /api/content:', error);
+    return NextResponse.json({ 
+      error: 'Failed to save data', 
+      details: error.message || String(error) 
+    }, { status: 500 });
   }
 }

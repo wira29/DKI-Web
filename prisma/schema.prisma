@@ -26,6 +26,7 @@ model Program {
   category          String
   level             String
   type              String  @default("KURSUS") // "KURSUS" or "PELATIHAN_KERJA"
+  description       String? @db.LongText
 }
 
 model Certification {
@@ -36,6 +37,7 @@ model Certification {
   image             String @db.LongText
   issuing_body      String
   price             Int
+  description       String? @db.LongText
 }
 
 model Testimonial {
